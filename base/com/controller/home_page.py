@@ -4,6 +4,6 @@ from base import app
 
 @app.route("/")
 def home_page():  # put application's code here
-    category_dao = CategoryDAO()
-    category_vo_list = category_dao.view_category()
-    return render_template('user/index.html', category_list=category_vo_list)
+    # category_dao = CategoryDAO()
+    # category_vo_list = category_dao.view_category()
+    return render_template('user/login.html')

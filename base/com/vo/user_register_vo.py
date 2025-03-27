@@ -1,6 +1,6 @@
 from base import db
 
-class UserRegister(db.Model):
+class UserRegisterVO(db.Model):
     __tablename__ = 'user_register'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)

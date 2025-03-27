@@ -1,5 +1,4 @@
 from base import db
-from base.com.vo import category_vo
 
 from base.com.vo.category_vo import CategoryVO
 
