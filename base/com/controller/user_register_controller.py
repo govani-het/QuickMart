@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from base.com.dao.user_register_dao import UserRegisterDAO
 from base.com.vo.user_register_vo import UserRegisterVO
-
+from base.com.dao.category_dao import CategoryDAO
 import os
 from base import app
 
@@ -20,3 +20,22 @@ def addUserdata():
 
     user_dao.insertUserData(user_vo)
     return render_template('user/login.html')
+
+@app.route('/user/login', methods=['POST'])
+def login_page():
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user_dao = UserRegisterDAO()
+    user = user_dao.getUserData(email, password)  # Fetch user
+
+    if email == 'admin@gmail' and password == '1234':
+
+        return render_template('admin/index.html')
+    elif user:
+        category_dao = CategoryDAO()
+        category_vo_list = category_dao.view_category()
+        return render_template('user/index.html', user_list=user,category_list=category_vo_list)
+    else:
+
+        return render_template('user/login.html', error="Invalid email or password")

@@ -48,37 +48,39 @@
                     <div class="col-lg-6">
                         <div class="login-form">
                             <div class="review-form  box-shadows">
-                                <div class="review-form-text">
-                                    <h5 class="comment-title">Log In</h5>
-                                    <img src="../../static/userResource/image/vector-line.png" alt="img">
-                                </div>
-                                <div class="review-inner-form ">
-                                    <div class="review-form-name">
-                                        <label for="email" class="form-label">Email Address**</label>
-                                        <input type="email" id="email" class="form-control" placeholder="Email">
+                                <form action="/user/login" method="post">
+                                    <div class="review-form-text">
+                                        <h5 class="comment-title">Log In</h5>
+                                        <img src="../../static/userResource/image/vector-line.png" alt="img">
                                     </div>
-                                    <div class="review-form-name">
-                                        <label for="password" class="form-label">Password*</label>
-                                        <input type="password" id="password" class="form-control"
-                                            placeholder="password">
-                                    </div>
-                                    <div class="review-form-name checkbox">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox">
-                                            <span class="address">
-                                                Remember Me</span>
+                                    <div class="review-inner-form ">
+                                        <div class="review-form-name">
+                                            <label for="email" class="form-label">Email Address**</label>
+                                            <input type="email" id="email" name="email" class="form-control" placeholder="Email">
                                         </div>
-                                        <div class="forget-pass">
-                                            <p>Forgot password?</p>
+                                        <div class="review-form-name">
+                                            <label for="password" class="form-label">Password*</label>
+                                            <input type="password" id="password" name="password" class="form-control"
+                                                placeholder="password">
+                                        </div>
+                                        <div class="review-form-name checkbox">
+                                            <div class="checkbox-item">
+                                                <input type="checkbox">
+                                                <span class="address">
+                                                    Remember Me</span>
+                                            </div>
+                                            <div class="forget-pass">
+                                                <p>Forgot password?</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="login-btn text-center">
-                                    <a href="#" class="shop-btn">Log In</a>
-                                    <span class="shop-account">Dont't have an account ?<a
-                                            href="/user/register">Sign Up
-                                            Free</a></span>
-                                </div>
+                                    <div class="login-btn text-center">
+                                        <input type="submit" name="submit" value="Log In" class="shop-btn">
+                                        <span class="shop-account">Dont't have an account ?<a
+                                                href="/user/register">Sign Up
+                                                Free</a></span>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -101,6 +103,11 @@
 
 
 
+   <script>
+    {% if error %}
+        alert("{{ error }}");
+    {% endif %}
+</script>
 
     <!--------------- jQuery ---------------->
     <script src="../../static/userResource/js/jquery_3.7.1.min.js"></script>

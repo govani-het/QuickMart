@@ -240,14 +240,16 @@
             </div>
             <div class="category-section">
                 {% for data in category_list %}
-                    <div class="product-wrapper" href="#">
-                        <div class="wrapper-img">
-                            <img src="{{ data.category_image_path }}/{{ data.category_image_name }}" alt="{{ data.category_name }}">
+                    <a href="/user/subcategory?category_id={{ data['category_id'] }}">
+                        <div class="product-wrapper" >
+                            <div class="wrapper-img">
+                                <img src="{{ data.category_image_path }}/{{ data.category_image_name }}" alt="{{ data.category_name }}">
+                            </div>
+                            <div class="wrapper-info">
+                                <p class="wrapper-details">{{ data.category_name }}</p>
+                            </div>
                         </div>
-                        <div class="wrapper-info">
-                            <p class="wrapper-details">{{ data.category_name }}</p>
-                        </div>
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
 

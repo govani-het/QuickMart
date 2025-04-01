@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -11,56 +10,36 @@
 
     <link rel="icon" href="../../static/userResource/image/top-logo.png">
 
-    <!--title  -->
     <title>EcoShop | Login</title>
 
-
-    <!--------------- swiper-css ---------------->
     <link rel="stylesheet" href="../../static/userResource/css/swiper10-bundle.min.css">
-
-    <!--------------- bootstrap-css ---------------->
     <link rel="stylesheet" href="../../static/userResource/css/bootstrap-5.3.2.min.css">
-
-    <!---------------------- Range Slider ------------------->
     <link rel="stylesheet" href="../../static/userResource/css/nouislider.min.css">
-
-    <!---------------------- Scroll ------------------->
     <link rel="stylesheet" href="../../static/userResource/css/aos-3.0.0.css">
-
-    <!--------------- additional-css ---------------->
     <link rel="stylesheet" href="../../static/userResource/css/style.css">
-
-
-
 </head>
 
 <body>
-
-    <!--------------- header-section --------------->
-
-    <!--------------- header-section-end --------------->
-
-    <!--------------- login-section --------------->
     <section class="login product footer-padding">
         <div class="container">
             <div class="login-section">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="login-form">
-                            <div class="review-form  box-shadows">
+                            <div class="review-form box-shadows">
                                 <div class="review-form-text">
                                     <h5 class="comment-title">Register</h5>
                                     <img src="../../static/userResource/image/vector-line.png" alt="img">
                                 </div>
-                                <form method="post" action="/user/addUserdata">
-                                    <div class="review-inner-form ">
+                                <form method="post" action="/user/addUserdata" onsubmit="return validateForm()">
+                                    <div class="review-inner-form">
                                         <div class="review-form-name">
                                             <label for="username" class="form-label">Username</label>
                                             <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                                         </div>
                                         <div class="review-form-name">
-                                            <label for="number" class="form-label">Phone Number</label>
-                                            <input type="number" id="email" name="phone" class="form-control" placeholder="Phone Number">
+                                            <label for="phone" class="form-label">Phone Number</label>
+                                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone Number">
                                         </div>
                                         <div class="review-form-name">
                                             <label for="email" class="form-label">Email Address**</label>
@@ -68,10 +47,8 @@
                                         </div>
                                         <div class="review-form-name">
                                             <label for="password" class="form-label">Password*</label>
-                                            <input type="password" id="password" name="password" class="form-control"
-                                                placeholder="password">
+                                            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                                         </div>
-
                                     </div>
                                     <div class="login-btn text-center">
                                         <input type="submit" name="submit" value="Register" class="shop-btn">
@@ -89,36 +66,36 @@
             </div>
         </div>
     </section>
-    <!--------------- login-section-end --------------->
 
-    <!--------------- footer-section--------------->
+    <script>
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phonePattern = /^[0-9]{10}$/;
 
-    <!--------------- footer-section-end--------------->
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+            if (!phonePattern.test(phone)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return false;
+            }
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return false;
+            }
+            return true;
+        }
+    </script>
 
-
-
-
-
-
-    <!--------------- jQuery ---------------->
     <script src="../../static/userResource/js/jquery_3.7.1.min.js"></script>
-
-    <!--------------- bootstrap-js ---------------->
     <script src="../../static/userResource/js/bootstrap_5.3.2.bundle.min.js"></script>
-
-    <!--------------- Range-Slider-js ---------------->
     <script src="../../static/userResource/js/nouislider.min.js"></script>
-
-    <!--------------- scroll-Animation-js ---------------->
     <script src="../../static/userResource/js/aos-3.0.0.js"></script>
-
-    <!--------------- swiper-js ---------------->
     <script src="../../static/userResource/js/swiper10-bundle.min.js"></script>
-
-    <!--------------- additional-js ---------------->
     <script src="../../static/userResource/js/ecoshop.js"></script>
-
-
 </body>
-
 </html>
