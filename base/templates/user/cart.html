@@ -86,20 +86,21 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr class="table-row ticket-row">
+                        {% for data in user_cart_data %}
+                            <tr class="table-row ticket-row">
                             <td class="table-wrapper wrapper-product">
                                 <div class="wrapper">
                                     <div class="wrapper-img">
-                                        <img src="./assets/images/homepage-one/product-img/p-img-1.webp" alt="img">
+                                        <img src="{{ data[0].product_image_path }}{{ data[0].product_image_name }}" alt="img">
                                     </div>
                                     <div class="wrapper-content">
-                                        <h5 class="heading">Fresh Red Tomatoos</h5>
+                                        <h5 class="heading">{{ data[0].product_name }}</h5>
                                     </div>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="heading main-price">$10.00</h5>
+                                    <h5 class="heading main-price">{{ data[0].product_price }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
@@ -108,7 +109,8 @@
                                         <span class="minus">
                                             -
                                         </span>
-                                        <span class="number">01</span>
+                                        <input type="number" name="quantity" class="number"
+                                           style="width: 25px;align-content: center" value="{{ data[1].quantity }}">
                                         <span class="plus">
                                             +
                                         </span>
@@ -117,168 +119,28 @@
                             </td>
                             <td class="table-wrapper wrapper-total">
                                 <div class="table-wrapper-center">
-                                    <h5 class="heading total-price">$10.00</h5>
+                                    <h5 class="heading total-price">{{ data[1].total_price }}</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <span>
+                                    <a href="/user/delete_cart_item?cart_id={{ data[1].cart_id }}">
                                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
                                                 fill="#AAAAAA"></path>
                                         </svg>
-                                    </span>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="table-row ticket-row">
-                            <td class="table-wrapper wrapper-product">
-                                <div class="wrapper">
-                                    <div class="wrapper-img">
-                                        <img src="./assets/images/homepage-one/product-img/p-img-2.webp" alt="img">
-                                    </div>
-                                    <div class="wrapper-content">
-                                        <h5 class="heading"> Farm Fresh Eggs</h5>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <h5 class="heading main-price">$05.00</h5>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <div class="quantity">
-                                        <span class="minus">
-                                            -
-                                        </span>
-                                        <span class="number">01</span>
-                                        <span class="plus">
-                                            +
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="table-wrapper wrapper-total">
-                                <div class="table-wrapper-center">
-                                    <h5 class="heading total-price">$05.00</h5>
-                                </div>
-                            </td>
-                            <td class="table-wrapper ">
-                                <div class="table-wrapper-center">
-                                    <span>
-                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                fill="#AAAAAA"></path>
-                                        </svg>
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="table-row ticket-row">
-                            <td class="table-wrapper wrapper-product">
-                                <div class="wrapper">
-                                    <div class="wrapper-img">
-                                        <img src="./assets/images/homepage-one/product-img/p-img-3.webp" alt="img">
-                                    </div>
-                                    <div class="wrapper-content">
-                                        <h5 class="heading">Fresh Watermelon</h5>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <h5 class="heading main-price">$30.00</h5>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <div class="quantity">
-                                        <span class="minus">
-                                            -
-                                        </span>
-                                        <span class="number">01</span>
-                                        <span class="plus">
-                                            +
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="table-wrapper wrapper-total">
-                                <div class="table-wrapper-center">
-                                    <h5 class="heading total-price">$30.00</h5>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <span>
-                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                fill="#AAAAAA"></path>
-                                        </svg>
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="table-row ticket-row">
-                            <td class="table-wrapper wrapper-product">
-                                <div class="wrapper">
-                                    <div class="wrapper-img">
-                                        <img src="./assets/images/homepage-one/product-img/p-img-4.webp" alt="img">
-                                    </div>
-                                    <div class="wrapper-content">
-                                        <h5 class="heading">Hot Spicy Steak</h5>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <h5 class="heading main-price">$20.00</h5>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <div class="quantity">
-                                        <span class="minus">
-                                            -
-                                        </span>
-                                        <span class="number">01</span>
-                                        <span class="plus">
-                                            +
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="table-wrapper wrapper-total">
-                                <div class="table-wrapper-center">
-                                    <h5 class="heading total-price">$20.00</h5>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <span>
-                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                fill="#AAAAAA"></path>
-                                        </svg>
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="wishlist-btn cart-btn">
-                <a href="empty-cart.html" class="clean-btn">Clear Cart</a>
+                <a href="/user/delete_all_cart_item" class="clean-btn">Clear Cart</a>
                 <a href="#" class="shop-btn update-btn">Update Cart</a>
                 <a href="checkout.html" class="shop-btn">Proceed to Checkout</a>
             </div>
@@ -293,7 +155,41 @@
 
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".quantity").forEach(quantityDiv => {
+        const minusButton = quantityDiv.querySelector(".minus");
+        const plusButton = quantityDiv.querySelector(".plus");
+        const numberInput = quantityDiv.querySelector(".number");
+        const totalPriceElement = quantityDiv.closest("tr").querySelector(".total-price"); // Get the total price for the row
+        const productPrice = parseFloat(quantityDiv.closest("tr").querySelector(".main-price").textContent); // Get product price
 
+        let quantity = parseInt(numberInput.value) || 1; // Get initial value
+
+        function updateTotalPrice() {
+            totalPriceElement.textContent = (quantity * productPrice).toFixed(2); // Update total price dynamically
+        }
+
+        plusButton.addEventListener("click", function () {
+            quantity++;
+            numberInput.value = quantity;
+            updateTotalPrice();
+        });
+
+        minusButton.addEventListener("click", function () {
+            if (quantity > 1) { // Prevent going below 1
+                quantity--;
+                numberInput.value = quantity;
+                updateTotalPrice();
+            }
+        });
+
+        updateTotalPrice(); // Initialize total price on page load
+    });
+});
+
+
+</script>
 
     <!--------------- jQuery ---------------->
     <script src="../../static/userResource/js/jquery_3.7.1.min.js"></script>

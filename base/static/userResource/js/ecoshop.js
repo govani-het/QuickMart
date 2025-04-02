@@ -259,64 +259,64 @@ function CountDown(lastDate) {
 CountDown("2024-12-28T10:41:43.000000Z");
 
 // product-cart-increment-decrement
-const productInfo = document.querySelector(".product-info");
-if (productInfo) {
-  const plus = document.querySelector(".plus"),
-    minus = document.querySelector(".minus"),
-    number = document.querySelector(".number");
-
-  if (plus) {
-    let plusAdd = 1;
-    number.innerText = "0" + plusAdd;
-
-    plus.addEventListener("click", () => {
-      plusAdd++;
-      plusAdd = plusAdd < 10 ? "0" + plusAdd : plusAdd;
-      number.innerHTML = plusAdd;
-    });
-
-    minus.addEventListener("click", () => {
-      if (plusAdd > 1) {
-        plusAdd--;
-        plusAdd = plusAdd < 10 ? "0" + plusAdd : plusAdd;
-        number.innerHTML = plusAdd;
-      }
-    });
-  }
-}
-
-// cart page increment/decrement
-const productCartPage = document.querySelector(".cart-section");
-if (productCartPage) {
-  const plusAll = document.querySelectorAll(`.plus`),
-    minusAll = document.querySelectorAll(".minus"),
-    numberAll = document.querySelectorAll(".number");
-  mainPriceAll = document.querySelectorAll(".main-price");
-  totalPriceAll = document.querySelectorAll(".total-price");
-  plusAll.forEach((item, i) => {
-    numberAll[i].innerText = "0" + 1;
-    item.addEventListener("click", () => {
-      let getNumber = numberAll[i].innerText;
-      getNumber++;
-      getNumber = getNumber < 10 ? "0" + getNumber : getNumber;
-      numberAll[i].innerHTML = getNumber;
-      const price = mainPriceAll[i].innerText.split("$").join("");
-      const totalPrice = price * getNumber;
-      totalPriceAll[i].innerText = "$" + totalPrice + ".00";
-    });
-  });
-  minusAll.forEach((item, i) => {
-    numberAll[i].innerText = "0" + 1;
-    item.addEventListener("click", () => {
-      let getNumber = numberAll[i].innerText;
-      if (getNumber > 1) {
-        getNumber--;
-        getNumber = getNumber < 10 ? "0" + getNumber : getNumber;
-        numberAll[i].innerHTML = getNumber;
-        const price = mainPriceAll[i].innerText.split("$").join("");
-        const totalPrice = price * getNumber;
-        totalPriceAll[i].innerText = "$" + totalPrice + ".00";
-      }
-    });
-  });
-}
+// const productInfo = document.querySelector(".product-info");
+// if (productInfo) {
+//   const plus = document.querySelector(".plus"),
+//     minus = document.querySelector(".minus"),
+//     number = document.querySelector(".number");
+//
+//   if (plus) {
+//     let plusAdd = 1;
+//     number.innerText = "0" + plusAdd;
+//
+//     plus.addEventListener("click", () => {
+//       plusAdd++;
+//       plusAdd = plusAdd < 10 ? "0" + plusAdd : plusAdd;
+//       number.innerHTML = plusAdd;
+//     });
+//
+//     minus.addEventListener("click", () => {
+//       if (plusAdd > 1) {
+//         plusAdd--;
+//         plusAdd = plusAdd < 10 ? "0" + plusAdd : plusAdd;
+//         number.innerHTML = plusAdd;
+//       }
+//     });
+//   }
+// }
+//
+// // cart page increment/decrement
+// const productCartPage = document.querySelector(".cart-section");
+// if (productCartPage) {
+//   const plusAll = document.querySelectorAll(`.plus`),
+//     minusAll = document.querySelectorAll(".minus"),
+//     numberAll = document.querySelectorAll(".number");
+//   mainPriceAll = document.querySelectorAll(".main-price");
+//   totalPriceAll = document.querySelectorAll(".total-price");
+//   plusAll.forEach((item, i) => {
+//     numberAll[i].innerText = "0" + 1;
+//     item.addEventListener("click", () => {
+//       let getNumber = numberAll[i].innerText;
+//       getNumber++;
+//       getNumber = getNumber < 10 ? "0" + getNumber : getNumber;
+//       numberAll[i].innerHTML = getNumber;
+//       const price = mainPriceAll[i].innerText.split("$").join("");
+//       const totalPrice = price * getNumber;
+//       totalPriceAll[i].innerText = "$" + totalPrice + ".00";
+//     });
+//   });
+//   minusAll.forEach((item, i) => {
+//     numberAll[i].innerText = "0" + 1;
+//     item.addEventListener("click", () => {
+//       let getNumber = numberAll[i].innerText;
+//       if (getNumber > 1) {
+//         getNumber--;
+//         getNumber = getNumber < 10 ? "0" + getNumber : getNumber;
+//         numberAll[i].innerHTML = getNumber;
+//         const price = mainPriceAll[i].innerText.split("$").join("");
+//         const totalPrice = price * getNumber;
+//         totalPriceAll[i].innerText = "$" + totalPrice + ".00";
+//       }
+//     });
+//   });
+// }

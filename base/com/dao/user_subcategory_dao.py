@@ -6,7 +6,12 @@ class UserSubcategoryDao:
         subcategory_vo_list = SubCategoryVO.query.filter_by(subcategory_category_id=category_id).all()
         return subcategory_vo_list
 
-    def loadProduct(self,subcategory_id):
+    def loadProductlist(self,subcategory_id):
         default_product_vo_list = ProductVO.query.filter_by(product_subcategory_id=subcategory_id).all()
         return default_product_vo_list
+
+    def loadProduct(self,product_id):
+        product_vo_list = ProductVO.query.filter_by(product_id=product_id)
+        return product_vo_list
+
 

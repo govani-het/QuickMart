@@ -9,6 +9,8 @@ class UserRegisterDAO:
         db.session.commit()
 
     def getUserData(self, user_email, user_password):
-        return db.session.query(UserRegisterVO).filter(
+        user_data =  db.session.query(UserRegisterVO).filter(
             and_(UserRegisterVO.email == user_email, UserRegisterVO.password == user_password)
         ).one_or_none()
+
+        return user_data
