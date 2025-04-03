@@ -90,7 +90,7 @@
                                         <select id="city" class="form-select" name="city" onchange="loadArea()">
                                             <option disabled selected>Choose...</option>
                                             {% for data in city %}
-                                                <option value="{{ data.city_name }}">{{ data.city_name }}</option>
+                                                <option value="{{ data.city_id }}">{{ data.city_name }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -206,7 +206,7 @@
 
                     for (var i=0; i<json.length; i++){
                         var option = document.createElement("option");
-                        option.value = json[i].area_name;
+                        option.value = json[i].area_id;
                         option.text = json[i].area_name;
                         area_id.options.add(option);
                     }
