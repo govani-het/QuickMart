@@ -42,3 +42,22 @@ def ajax_city():
 
     return jsonify(ajax_area)
 
+@app.route('/user/place_order',methods=['POST'])
+def place_order():
+    userAddressDAO = UserAddressDAO()
+    userAddressVO = UserAddressVO()
+
+    userAddressVO.user_id = session['user_id']
+    userAddressVO.username = request.form.get('username')
+    userAddressVO.email = request.form.get('email')
+    userAddressVO.phone = request.form.get('phone')
+    userAddressVO.address = request.form.get('address')
+    userAddressVO.city = request.form.get('city')
+    userAddressVO.area = request.form.get('area')
+    userAddressVO.pincode = request.form.get('pincode')
+
+    userAddressDAO.add_address(userAddressVO)
+
+    return redirect('/user/view_cart')
+
+

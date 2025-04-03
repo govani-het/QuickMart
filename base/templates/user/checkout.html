@@ -59,6 +59,7 @@
     <section class="checkout product footer-padding">
         <div class="container">
             <div class="checkout-section">
+                <form action="/user/place_order" method="post">
                 <div class="row gy-5 gy-lg-0">
                     <div class="col-lg-6">
                         <div class="checkout-wrapper">
@@ -89,7 +90,7 @@
                                         <select id="city" class="form-select" name="city" onchange="loadArea()">
                                             <option disabled selected>Choose...</option>
                                             {% for data in city %}
-                                                <option value="{{ data.city_id }}">{{ data.city_name }}</option>
+                                                <option value="{{ data.city_name }}">{{ data.city_name }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -108,7 +109,7 @@
                                         </div>
                                         <div class="review-form-name">
                                             <label for="number" class="form-label">Postcode / ZIP*</label>
-                                            <input type="number" id="number" class="form-control" placeholder="0000">
+                                            <input type="number" id="number" name="pincode" class="form-control" placeholder="0000">
                                         </div>
                                     </div>
                                     <h5 class="wrapper-heading">Shipping Address</h5>
@@ -173,12 +174,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="shop-btn">Place Order Now</a>
+                                    <button class="shop-btn">Place Order Now</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </section>
@@ -204,7 +206,7 @@
 
                     for (var i=0; i<json.length; i++){
                         var option = document.createElement("option");
-                        option.value = json[i].area_id;
+                        option.value = json[i].area_name;
                         option.text = json[i].area_name;
                         area_id.options.add(option);
                     }
