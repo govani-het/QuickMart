@@ -21,3 +21,12 @@ class CartDAO:
     def delete_cart_all_item(self,user_id):
         CartVO.query.filter_by(user_id=user_id).delete()
         db.session.commit()
+
+    def get_cart_item(self,user_id,product_id):
+        cart_vo = CartVO.query.filter_by(user_id=user_id,product_id=product_id).first()
+        return cart_vo
+
+
+    def mearge_cart(self,cart_vo):
+        db.session.merge(cart_vo)
+        db.session.commit()

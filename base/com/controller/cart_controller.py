@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for,session,flash
+from flask import Flask, render_template, request, redirect, url_for,session
 from base.com.dao.user_register_dao import UserRegisterDAO
 from base.com.vo.user_register_vo import UserRegisterVO
 
@@ -17,6 +17,7 @@ def add_cart():
     product_id = request.form.get('product_id')
     quantity = request.form.get('quantity')
     price = request.form.get('price')
+
     try:
         quantity = int(quantity)
         price = int(price)
@@ -24,14 +25,27 @@ def add_cart():
     except ValueError:
         return "Invalid quantity or price", 400
 
-    cart_vo.user_id = user_id
-    cart_vo.product_id = product_id
-    cart_vo.quantity = quantity
-    cart_vo.price = price
-    cart_vo.total_price = total_price
+    update_cart_item = cart_dao.get_cart_item(user_id, product_id)
+    if update_cart_item:
+        new_quantity = quantity + update_cart_item.quantity
+        new_price = price * new_quantity
 
-    cart_dao.add_cart(cart_vo)
-    flash("Item added successfully")
+        cart_vo.cart_id = update_cart_item.cart_id
+        cart_vo.user_id = user_id
+        cart_vo.product_id = product_id
+        cart_vo.price = price
+        cart_vo.quantity = new_quantity
+        cart_vo.total_price = new_price
+
+        cart_dao.mearge_cart(cart_vo)
+    else:
+        cart_vo.user_id = user_id
+        cart_vo.product_id = product_id
+        cart_vo.quantity = quantity
+        cart_vo.price = price
+        cart_vo.total_price = total_price
+        cart_dao.add_cart(cart_vo)
+
     return redirect(request.referrer)
 
 @app.route('/user/view_cart')
@@ -55,6 +69,3 @@ def delete_all_cart_item():
     user_id = session.get('user_id')
     cart_dao.delete_cart_all_item(user_id)
     return redirect('/user/view_cart')
-
-
-# ${json[i].product_id}
