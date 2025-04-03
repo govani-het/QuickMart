@@ -142,7 +142,7 @@
             <div class="wishlist-btn cart-btn">
                 <a href="/user/delete_all_cart_item" class="clean-btn">Clear Cart</a>
                 <a href="#" class="shop-btn update-btn">Update Cart</a>
-                <a href="checkout.html" class="shop-btn">Proceed to Checkout</a>
+                <a href="/user/checkout_order" class="shop-btn">Proceed to Checkout</a>
             </div>
         </div>
     </section>
@@ -161,13 +161,13 @@
         const minusButton = quantityDiv.querySelector(".minus");
         const plusButton = quantityDiv.querySelector(".plus");
         const numberInput = quantityDiv.querySelector(".number");
-        const totalPriceElement = quantityDiv.closest("tr").querySelector(".total-price"); // Get the total price for the row
-        const productPrice = parseFloat(quantityDiv.closest("tr").querySelector(".main-price").textContent); // Get product price
+        const totalPriceElement = quantityDiv.closest("tr").querySelector(".total-price");
+        const productPrice = parseFloat(quantityDiv.closest("tr").querySelector(".main-price").textContent);
 
-        let quantity = parseInt(numberInput.value) || 1; // Get initial value
+        let quantity = parseInt(numberInput.value) || 1;
 
         function updateTotalPrice() {
-            totalPriceElement.textContent = (quantity * productPrice).toFixed(2); // Update total price dynamically
+            totalPriceElement.textContent = (quantity * productPrice).toFixed(2);
         }
 
         plusButton.addEventListener("click", function () {
@@ -184,7 +184,7 @@
             }
         });
 
-        updateTotalPrice(); // Initialize total price on page load
+        updateTotalPrice();
     });
 });
 

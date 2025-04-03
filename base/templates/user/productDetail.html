@@ -238,7 +238,7 @@
         const plusButton = document.querySelector(".plus");
         const numberInput = document.querySelector(".number");
 
-        let quantity = 1; // Default value
+        let quantity = 1;
         numberInput.value = quantity;
 
         plusButton.addEventListener("click", function () {
@@ -247,7 +247,7 @@
         });
 
         minusButton.addEventListener("click", function () {
-            if (quantity > 1) { // Prevent negative values
+            if (quantity > 1) {
                 quantity--;
                 numberInput.value = quantity;
             }

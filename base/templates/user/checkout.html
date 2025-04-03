@@ -67,48 +67,43 @@
                                 <div class="review-form">
                                     <div class=" account-inner-form">
                                         <div class="review-form-name">
-                                            <label for="fname" class="form-label">First Name*</label>
-                                            <input type="text" id="fname" class="form-control" placeholder="First Name">
+                                            <label for="fname" class="form-label">UserName*</label>
+                                            <input type="text" id="username" name="username" value="{{ userinfo.username }}" class="form-control" placeholder="UserName">
                                         </div>
-                                        <div class="review-form-name">
-                                            <label for="lname" class="form-label">Last Name*</label>
-                                            <input type="text" id="lname" class="form-control" placeholder="Last Name">
-                                        </div>
+
                                     </div>
                                     <div class=" account-inner-form">
                                         <div class="review-form-name">
                                             <label for="email" class="form-label">Email*</label>
-                                            <input type="email" id="email" class="form-control"
+                                            <input type="email" id="email" class="form-control" name="email" value="{{ userinfo.email }}"
                                                 placeholder="user@gmail.com">
                                         </div>
                                         <div class="review-form-name">
                                             <label for="phone" class="form-label">Phone*</label>
-                                            <input type="tel" id="phone" class="form-control"
+                                            <input type="tel" id="phone" class="form-control" name="phone" value="{{ userinfo.phone }}"
                                                 placeholder="+880388**0899">
                                         </div>
                                     </div>
                                     <div class="review-form-name">
-                                        <label for="country" class="form-label">Country*</label>
-                                        <select id="country" class="form-select">
-                                            <option>Choose...</option>
-                                            <option>Bangladesh</option>
-                                            <option>United States</option>
-                                            <option selected>United Kingdom</option>
+                                        <label for="country" class="form-label">City</label>
+                                        <select id="city" class="form-select" name="city" onchange="loadArea()">
+                                            <option disabled selected>Choose...</option>
+                                            {% for data in city %}
+                                                <option value="{{ data.city_id }}">{{ data.city_name }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="review-form-name address-form">
                                         <label for="address" class="form-label">Address*</label>
-                                        <input type="text" id="address" class="form-control"
+                                        <input type="text" id="address" name="address" class="form-control"
                                             placeholder="Enter your Address">
                                     </div>
                                     <div class=" account-inner-form city-inner-form">
                                         <div class="review-form-name">
-                                            <label for="city" class="form-label">Town / City*</label>
-                                            <select id="city" class="form-select">
-                                                <option>Choose...</option>
-                                                <option>Newyork</option>
-                                                <option>Dhaka</option>
-                                                <option selected>London</option>
+                                            <label for="area" class="form-label">Area</label>
+                                            <select id="area" class="form-select" name="area">
+                                                <option disabled selected>Choose...</option>
+
                                             </select>
                                         </div>
                                         <div class="review-form-name">
@@ -116,23 +111,8 @@
                                             <input type="number" id="number" class="form-control" placeholder="0000">
                                         </div>
                                     </div>
+                                    <h5 class="wrapper-heading">Shipping Address</h5>
 
-
-                                    <div class="review-form-name checkbox">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="account">
-                                            <label for="account" class="form-label">
-                                                Create an account?</label>
-                                        </div>
-                                    </div>
-                                    <div class="review-form-name shipping">
-                                        <h5 class="wrapper-heading">Shipping Address</h5>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="remember">
-                                            <label for="remember" class="form-label">
-                                                Create an account?</label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -149,58 +129,23 @@
                                     <hr>
                                     <div class="subtotal product-total">
                                         <ul class="product-list">
+                                            {% for data in user_cart_data %}
                                             <li>
                                                 <div class="product-info">
-                                                    <h5 class="wrapper-heading">Apple Watch X1</h5>
-                                                    <p class="paragraph">64GB, Black, 44mm, Chain Belt</p>
+                                                    <h5 class="wrapper-heading">{{ data[0].product_name }}</h5>
+                                                    <p class="paragraph">{{ data[0].product_description }}</p>
                                                 </div>
                                                 <div class="price">
-                                                    <h5 class="wrapper-heading">$38</h5>
+                                                    <h5 class="wrapper-heading">₹{{ data[1].total_price }}</h5>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="product-info">
-                                                    <h5 class="wrapper-heading">Beats Wireless x1</h5>
-                                                    <p class="paragraph">64GB, Black, 44mm, Chain Belt</p>
-                                                </div>
-                                                <div class="price">
-                                                    <h5 class="wrapper-heading">$48</h5>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="product-info">
-                                                    <h5 class="wrapper-heading">Samsung Galaxy S10 x2</h5>
-                                                    <p class="paragraph">12GB RAM, 512GB, Dark Blue</p>
-                                                </div>
-                                                <div class="price">
-                                                    <h5 class="wrapper-heading">$279</h5>
-                                                </div>
-                                            </li>
+                                            {% endfor %}
                                         </ul>
                                     </div>
-                                    <hr>
-                                    <div class="subtotal product-total">
-                                        <h5 class="wrapper-heading">SUBTOTAL</h5>
-                                        <h5 class="wrapper-heading">$365</h5>
-                                    </div>
-                                    <div class="subtotal product-total">
-                                        <ul class="product-list">
-                                            <li>
-                                                <div class="product-info">
-                                                    <p class="paragraph">SHIPPING</p>
-                                                    <h5 class="wrapper-heading">Free Shipping</h5>
 
-                                                </div>
-                                                <div class="price">
-                                                    <h5 class="wrapper-heading">+$0</h5>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <hr>
                                     <div class="subtotal total">
                                         <h5 class="wrapper-heading">TOTAL</h5>
-                                        <h5 class="wrapper-heading price">$365</h5>
+                                        <h5 class="wrapper-heading price">₹{{ final_price }}</h5>
                                     </div>
                                     <div class="subtotal payment-type">
                                         <div class="checkbox-item">
@@ -225,7 +170,6 @@
                                             <input type="radio" id="credit" name="bank">
                                             <div class="credit">
                                                 <h5 class="wrapper-heading">Credit/Debit Cards or Paypal</h5>
-
                                             </div>
                                         </div>
                                     </div>
@@ -246,7 +190,30 @@
 
 
 
+<script type="text/javascript">
+        function loadArea(){
+            var city_id = document.getElementById('city')
+            var area_id = document.getElementById('area')
 
+            area_id.innerHTML=''
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+
+                if (ajax.readyState === 4){
+                    var json = JSON.parse(ajax.responseText);
+
+                    for (var i=0; i<json.length; i++){
+                        var option = document.createElement("option");
+                        option.value = json[i].area_id;
+                        option.text = json[i].area_name;
+                        area_id.options.add(option);
+                    }
+                }
+            };
+            ajax.open('get',"/user/ajax_city?city_id=" + city_id.value,true);
+            ajax.send();
+        }
+    </script>
     <!--------------- jQuery ---------------->
     <script src="../../static/userResource/js/jquery_3.7.1.min.js"></script>
 
