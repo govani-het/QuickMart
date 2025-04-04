@@ -15,18 +15,6 @@ def load_user_subcategory():
     product_list = subcategory_dao.loadProductlist(default_product_id)
     return render_template('user/subCategoryList.html', subcategory_list=subcategory_list, product_list=product_list)
 
-# @app.route('/user/loadProduct')
-# def load_user_product():
-#     subcategory_dao = UserSubcategoryDao()
-#
-#     subcategory_id = request.args.get('subcategory_id')
-#     category_id = request.form.get('category_id')
-#
-#     product_list = subcategory_dao.loadProduct(subcategory_id)
-#     subcategory_list = subcategory_dao.loadSubcategoryData(category_id)
-#
-#     return render_template('user/subCategoryList.html',subcategory_list=subcategory_list,product_list=product_list)
-
 @app.route('/user/ajax_product_list')
 def load_user_ajax_product():
     subcategory_dao = UserSubcategoryDao()

@@ -1,5 +1,6 @@
 from base import db
 from base.com.vo.user_register_vo import UserRegisterVO
+from base.com.vo.user_address_vo import UserAddressVO
 from base.com.vo.product_vo import ProductVO
 class OrderVO(db.Model):
     __tablename__ = 'user_order_vo'
@@ -8,6 +9,8 @@ class OrderVO(db.Model):
                                                   onupdate='CASCADE'), nullable=False)
     product_id = db.Column('product_id',db.Integer, db.ForeignKey(ProductVO.product_id, ondelete='CASCADE',
                                                   onupdate='CASCADE'),nullable=False)
+    address_id = db.Column('address_id', db.Integer, db.ForeignKey(UserAddressVO.address_id, ondelete='CASCADE',
+                                                                   onupdate='CASCADE'), nullable=False)
     quantity = db.Column('quantity',db.Integer,nullable=False)
     price = db.Column('price',db.Integer,nullable=False)
     total_price = db.Column('total_price',db.Integer,nullable=False)
@@ -17,6 +20,7 @@ class OrderVO(db.Model):
             'order_id': self.order_id,
             'user_id': self.user_id,
             'product_id': self.product_id,
+            'address_id': self.address_id,
             'quantity': self.quantity,
             'price': self.price,
             'total_price': self.total_price

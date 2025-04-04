@@ -11,10 +11,6 @@ class UserAddressDAO:
         user = UserRegisterVO.query.filter_by(id=user_id).first()
         return user
 
-    def getCity(self):
-        city = CityVO.query.all()
-        return city
-
     def getArea(self,city_vo):
         area_vo = AreaVO.query.filter_by(area_city_id=city_vo.area_city_id).all()
         return area_vo
@@ -23,5 +19,9 @@ class UserAddressDAO:
         db.session.commit()
 
     def view_address(self,user_id):
-        address_vo = UserAddressVO.query.filter_by(user_id=user_id).all()
+        address_vo = UserAddressVO.query.filter_by(user_id=user_id).first()
         return address_vo
+
+    def update_address(self,address_vo):
+        db.session.merge(address_vo)
+        db.session.commit()
