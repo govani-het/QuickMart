@@ -8,3 +8,4 @@ from base.com.controller import user_register_controller
 from base.com.controller import user_subcategory_controller
 from base.com.controller import cart_controller
 from base.com.controller import user_order_controller
+from base.com.controller import admin_order_controller

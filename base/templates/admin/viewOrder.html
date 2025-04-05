@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title-box">
-                                <h4 class="page-title">View Category</h4>
+                                <h4 class="page-title">View Order</h4>
                             </div>
                         </div>
                     </div>
@@ -69,32 +69,33 @@
                                         <thead>
                                         <tr>
                                             <th>User Name</th>
-                                            <th>Total Price</th>
-                                            <th>Order Date</th>
-                                            <th>Order Status</th>
-                                            <th>Payment Status</th>
+                                            <th>Phone</th>
                                             <th>Address</th>
+                                            <th>Total Price</th>
+                                            <th>Order Item</th>
+                                            <th>Order Status</th>
+                                            <th>Current Date</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {% for data in category_vo_list %}
+                                        {% for data in order_list %}
                                             <tr>
-                                                <td>Yash Patel</td>
-                                                <td>100</td>
-                                                <td>2025-02-25 10:30 AM</td>
+                                                <td>{{ data[0].username }}</td>
+                                                <td>{{ data[0].phone }}</td>
+                                                <td>{{ data[0].address }}<br>{{ data[2].city_name }} <br> {{ data[3].area_name }}</td>
+                                                <td>{{ data[1].final_price }}</td>
+                                                <td>view</td>
                                                 <td>
-                                                    <select>
-                                                        <option>Pending</option>
-                                                        <option>Shipping</option>
-                                                        <option>Delivered</option>
-                                                    </select>
+                                                   <select name="order_status" class="w-full appearance-none bg-white border border-gray-300 text-gray-700 text-sm px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 hover:border-blue-400 transition duration-150 ease-in-out">
+                                                    <option value="Pending" selected>Pending</option>
+                                                    <option value="Shipped">Shipped</option>
+                                                    <option value="Delivered">Delivered</option>
+                                                    <option value="Cancelled">Cancelled</option>
+                                                  </select>
                                                 </td>
-                                                <td>
-                                                    <select>
-                                                        <option>Paid</option>
-                                                        <option>Unpaid</option>
-                                                    </select></td>
-                                                <td>Gota</td>
+
+
+                                                <td>{{ data[1].current_date  }}</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
