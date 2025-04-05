@@ -1,38 +1,41 @@
 import os
 from base import app
+from base import db
 
 from flask import Flask, render_template, request, redirect, url_for,session,jsonify
 
+#here all vo
 from base.com.vo.user_register_vo import UserRegisterVO
+from base.com.vo.user_address_vo import UserAddressVO
+from base.com.vo.user_order_item_vo import OrderItemVO
+from base.com.vo.user_order_vo import OrderVO
+from base.com.vo.cart_vo import CartVO
+
+#here all dao
 
 from base.com.dao.user_address_dao import UserAddressDAO
-from base.com.vo.user_address_vo import UserAddressVO
-
-from base.com.vo.user_order_vo import OrderVO
-# from base.com.dao.user_order_dao import
-
 from base.com.vo.area_vo import AreaVO
 from base.com.dao.area_dao import AreaDAO
 from base.com.dao.city_dao import CityDAO
-
 from base.com.dao.cart_dao import CartDAO
-from base.com.vo.cart_vo import CartVO
+
+
 
 @app.route('/user/checkout_order')
 def checkout_order():
     user_dao = UserAddressDAO()
     area_dao = AreaDAO()
     city_dao = CityDAO()
+    cart_dao = CartDAO()
 
     user_id = session.get('user_id')
-    cart_dao = CartDAO()
+
     final_price = 0
 
     userAddressInfo = user_dao.view_address(user_id)
     userinfo = user_dao.getUserinfo(user_id)
     city = city_dao.view_city()
     area = area_dao.view_area()
-
 
     user_cart_data = cart_dao.get_cart_data(user_id)
     for i in user_cart_data:
@@ -57,14 +60,14 @@ def place_order():
     userAddressDAO = UserAddressDAO()
     userAddressVO = UserAddressVO()
 
-    order_vo = OrderVO
+    order_item_vo = OrderItemVO()
+    order_vo = OrderVO()
 
+    cart_dao = CartDAO()
 
     user_id = session.get('user_id')
 
-    cart_dao = CartDAO()
-    cart_vo = CartVO()
-
+# here user can add address or if user has already added address user can update it if user want
     address_id = request.form.get('address_id')
 
     userAddressVO.user_id = user_id
@@ -82,10 +85,36 @@ def place_order():
     else:
         userAddressDAO.add_address(userAddressVO)
 
-    user_cart_data = cart_dao.get_cart_data(user_id)
+# here create new order
 
-    for i in user_cart_data:
-        pass
+    address = UserAddressVO.query.filter_by(user_id=user_id).first()
+
+    order_vo.address_id = address.address_id
+    order_vo.user_id = user_id
+    order_vo.final_price = request.form.get('final_price')
+    order_vo.status = 'Pending'
+    order_vo.payment_method = request.form.get('payment_type')
+
+    db.session.add(order_vo)
+    db.session.commit()
+
+# now we move cart item to order item table
+
+
+    cart_data = cart_dao.get_cart_data(user_id)
+
+    for item in cart_data:
+        order_item_vo = OrderItemVO()
+        order_item_vo.order_id = order_vo.order_id
+        order_item_vo.user_id = user_id
+        order_item_vo.product_id = item[1].product_id
+        order_item_vo.quantity = item[1].quantity
+        order_item_vo.price = item[1].price
+        order_item_vo.total_price = item[1].total_price
+
+        db.session.add(order_item_vo)
+        db.session.commit()
+    cart_dao.delete_cart_all_item(user_id)
 
     return redirect('/user/view_cart')
 
