@@ -5,7 +5,6 @@ from base.com.dao.user_order_dao import OrderDAO
 from base.com.dao.area_dao import AreaDAO
 from base.com.dao.city_dao import CityDAO
 
-
 from base import app
 
 @app.route('/user/profile')

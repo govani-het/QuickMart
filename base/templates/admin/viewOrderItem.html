@@ -68,9 +68,10 @@
                                            cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-                                            <th style="width: 100px">Product_image</th>
+                                            <th style="width: 100px;height: auto">Product Image</th>
+                                            <th>Product Name</th>
                                             <th>Price</th>
-                                            <th>quantity</th>
+                                            <th>Order Quantity</th>
                                             <th>Total Price</th>
                                         </tr>
                                         </thead>
@@ -78,6 +79,7 @@
                                         {% for data in order_item_list %}
                                             <tr>
                                                 <td><img style="height: 50px;width: 75px" src="{{ data[0].product_image_path }}{{ data[0].product_image_name }}" alt="img"></td>
+                                                <td>{{ data[0].product_name }}  ({{ data[0].product_quantity }})</td>
                                                 <td>{{ data[0].product_price }}</td>
                                                 <td>{{ data[1].quantity }}</td>
                                                 <td>{{ data[1].total_price }}</td>

@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for,session
+
+
 from base.com.dao.user_register_dao import UserRegisterDAO
-from base.com.vo.user_register_vo import UserRegisterVO
 from base.com.dao.category_dao import CategoryDAO
+
+from base.com.vo.user_register_vo import UserRegisterVO
+
 import os
 from base import app
 

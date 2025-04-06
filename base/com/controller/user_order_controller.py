@@ -11,15 +11,14 @@ from base.com.vo.user_order_item_vo import OrderItemVO
 from base.com.vo.user_order_vo import OrderVO
 from base.com.vo.cart_vo import CartVO
 from base.com.vo.area_vo import AreaVO
+
+
 #here all dao
 
 from base.com.dao.user_address_dao import UserAddressDAO
-
 from base.com.dao.area_dao import AreaDAO
 from base.com.dao.city_dao import CityDAO
 from base.com.dao.cart_dao import CartDAO
-
-
 
 @app.route('/user/checkout_order')
 def checkout_order():

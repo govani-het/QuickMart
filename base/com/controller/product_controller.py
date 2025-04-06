@@ -3,13 +3,11 @@ from flask import render_template,request,redirect,jsonify
 from werkzeug.utils import secure_filename
 
 from base.com.dao.subcategory_dao import SubcategoryDAO
-from base.com.vo import product_vo
-from base.com.vo.subcategory_vo import SubCategoryVO
-
 from base.com.dao.category_dao import CategoryDAO
-from base.com.vo.category_vo import CategoryVO
-
 from base.com.dao.product_dao import ProductDAO
+
+
+from base.com.vo.subcategory_vo import SubCategoryVO
 from base.com.vo.product_vo import ProductVO
 
 from base import app
