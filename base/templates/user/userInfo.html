@@ -1,0 +1,214 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords"
+        content="EcoShop, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="C:\Users\Het\Desktop\user\userResource\image\top-logo.png">
+
+    <!--title  -->
+    <title>EcoShop | Profile</title>
+
+
+    <!--------------- swiper-css ---------------->
+    <link rel="stylesheet" href="../../static/userResource/css/swiper10-bundle.min.css">
+
+    <!--------------- bootstrap-css ---------------->
+    <link rel="stylesheet" href="../../static/userResource/css/bootstrap-5.3.2.min.css">
+
+    <!---------------------- Range Slider ------------------->
+    <link rel="stylesheet" href="../../static/userResource/css/nouislider.min.css">
+
+    <!---------------------- Scroll ------------------->
+    <link rel="stylesheet" href="../../static/userResource/css/aos-3.0.0.css">
+
+    <!--------------- additional-css ---------------->
+    <link rel="stylesheet" href="../../static/userResource/css/style.css">
+
+
+</head>
+
+<body>
+
+
+    <!--------------- header-section --------------->
+    {% include 'user/header.html' %}
+    <!--------------- header-section-end --------------->
+
+    <!--------------- blog-tittle-section---------------->
+    <section class="blog about-blog">
+        <div class="container">
+
+            <div class="blog-heading about-heading">
+                <h1 class="heading">User Dashboard</h1>
+            </div>
+        </div>
+    </section>
+    <!--------------- blog-tittle-section-end---------------->
+
+    <!---------------user-profile-section---------------->
+    <section class="user-profile footer-padding">
+        <div class="container">
+            <div class="user-profile-section box-shadows">
+                <div class="dashboard-heading ">
+                    <h5 class="dashboard-title">User Options</h5>
+                    <div class="dashboard-switch">
+                        <span class="text">Switch Dashboard</span>
+                        <span onclick="switchDashboard()" class="switch-icon"></span>
+                    </div>
+                </div>
+                <div class="user-dashboard">
+                    {% include 'user/userMenu.html' %}
+
+                    <!-- nav-content -->
+                    <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
+
+
+                        <div >
+                            <div class="seller-application-section">
+                                <div class="row ">
+                                    <div class="col-lg-7">
+                                        <div class=" account-section">
+                                            <div class="review-form">
+                                                <div class=" account-inner-form">
+                                                    <div class="review-form-name">
+                                                        <label for="firname" class="form-label">First Name*</label>
+                                                        <input type="text" id="firname" class="form-control"
+                                                            placeholder="First Name">
+                                                    </div>
+                                                    <div class="review-form-name">
+                                                        <label for="latname" class="form-label">Last Name*</label>
+                                                        <input type="text" id="latname" class="form-control"
+                                                            placeholder="Last Name">
+                                                    </div>
+                                                </div>
+                                                <div class=" account-inner-form">
+                                                    <div class="review-form-name">
+                                                        <label for="gmail" class="form-label">Email*</label>
+                                                        <input type="email" id="gmail" class="form-control"
+                                                            placeholder="user@gmail.com">
+                                                    </div>
+                                                    <div class="review-form-name">
+                                                        <label for="telephone" class="form-label">Phone*</label>
+                                                        <input type="tel" id="telephone" class="form-control"
+                                                            placeholder="+880388**0899">
+                                                    </div>
+                                                </div>
+                                                <div class="review-form-name">
+                                                    <label for="region" class="form-label">Country*</label>
+                                                    <select id="region" class="form-select">
+                                                        <option>Choose...</option>
+                                                        <option>Bangladesh</option>
+                                                        <option>United States</option>
+                                                        <option>United Kingdom</option>
+                                                    </select>
+                                                </div>
+                                                <div class="review-form-name address-form">
+                                                    <label for="addres" class="form-label">Address*</label>
+                                                    <input type="text" id="addres" class="form-control"
+                                                        placeholder="Enter your Address">
+                                                </div>
+                                                <div class=" account-inner-form city-inner-form">
+                                                    <div class="review-form-name">
+                                                        <label for="teritory" class="form-label">Town / City*</label>
+                                                        <select id="teritory" class="form-select">
+                                                            <option>Choose...</option>
+                                                            <option>Newyork</option>
+                                                            <option>Dhaka</option>
+                                                            <option selected>London</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="review-form-name">
+                                                        <label for="post" class="form-label">Postcode / ZIP*</label>
+                                                        <input type="number" id="post" class="form-control"
+                                                            placeholder="0000">
+                                                    </div>
+                                                </div>
+                                                <div class="submit-btn">
+                                                    <a href="#" class="shop-btn cancel-btn">Cancel</a>
+                                                    <a href="#" class="shop-btn update-btn">Update Profile</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="img-upload-section">
+                                            <div class="logo-wrapper">
+                                                <h5 class="comment-title">Update Logo</h5>
+                                                <p class="paragraph">Size300x300. Gifs work
+                                                    too.Max 5mb.</p>
+                                                <div class="logo-upload">
+                                                    <img src="assets/images/homepage-one/upload.webp" alt="upload"
+                                                        class="upload-img" id="upload-img">
+                                                    <div class="upload-input">
+                                                        <label for="input-file">
+                                                            <span>
+                                                                <svg width="32" height="32" viewBox="0 0 32 32"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
+                                                                        fill="white"></path>
+                                                                    <path
+                                                                        d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
+                                                                        fill="white"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </label>
+                                                        <input type="file"
+                                                            accept="image/jpeg, image/jpg, image/png, image/webp"
+                                                            id="input-file">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- user-profile-section-end --------------->
+
+    <!--------------- footer-section--------------->
+    {% include 'user/footer.html' %}
+    <!--------------- footer-section-end--------------->
+
+
+
+
+
+
+    <!--------------- jQuery ---------------->
+    <script src="../../static/userResource/js/jquery_3.7.1.min.js"></script>
+
+    <!--------------- bootstrap-js ---------------->
+    <script src="../../static/userResource/js/bootstrap_5.3.2.bundle.min.js"></script>
+
+    <!--------------- Range-Slider-js ---------------->
+    <script src="../../static/userResource/js/nouislider.min.js"></script>
+
+    <!--------------- scroll-Animation-js ---------------->
+    <script src="../../static/userResource/js/aos-3.0.0.js"></script>
+
+    <!--------------- swiper-js ---------------->
+    <script src="../../static/userResource/js/swiper10-bundle.min.js"></script>
+
+    <!--------------- additional-js ---------------->
+    <script src="../../static/userResource/js/ecoshop.js"></script>
+
+
+
+</body>
+
+</html>
