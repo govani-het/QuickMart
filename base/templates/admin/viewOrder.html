@@ -84,7 +84,7 @@
                                                 <td>{{ data[0].phone }}</td>
                                                 <td>{{ data[0].address }}<br>{{ data[2].city_name }} <br> {{ data[3].area_name }}</td>
                                                 <td>{{ data[1].final_price }}</td>
-                                                <td>view</td>
+                                                <td><a href="/admin/view_order_list?order_id={{ data[1].order_id }}">view</a></td>
                                                 <td>
                                                    <select name="order_status" class="w-full appearance-none bg-white border border-gray-300 text-gray-700 text-sm px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 hover:border-blue-400 transition duration-150 ease-in-out">
                                                     <option value="Pending" selected>Pending</option>

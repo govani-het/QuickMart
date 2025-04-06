@@ -20,3 +20,12 @@ def view_order():
     order_list = admin_order_dao.viewOrder()
 
     return render_template('admin/viewOrder.html',order_list=order_list)
+
+@app.route('/admin/view_order_list')
+def view_order_list():
+    admin_order_dao = AdminOrderDAO()
+    order_id = request.args.get('order_id')
+
+    order_item_list = admin_order_dao.viewOrderItem(order_id)
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>",order_item_list)
+    return render_template('admin/viewOrderItem.html',order_item_list=order_item_list)
