@@ -128,14 +128,14 @@
                                             <div class="form-group mt-3">
                                                 <label>Product quantity</label>
                                                 <div>
-                                                    <input type="number" name="product_quantity" value="{{ data['product_quantity'] }}" class="form-control">
+                                                    <input type="text" name="product_quantity" value="{{ data['product_quantity'] }}" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12 px-0">
                                                 <div class="input-group mt-2">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="product_img" accept="image/png,image/jpeg" id="inputGroupFile04">
+                                                        <input type="file" class="custom-file-input" name="product_img" value="{{ data['product_image_path'] }}{{ data['product_image_name'] }}" accept="image/png,image/jpeg" id="inputGroupFile04">
                                                         <label class="custom-file-label" for="inputGroupFile04" disabled="">{{ data['product_image_name'] }}</label>
                                                     </div>
 
