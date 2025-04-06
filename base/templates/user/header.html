@@ -3,7 +3,7 @@
             <div class="container">
                 <div class="header-top">
                     <div class="header-profile">
-                        <a href="user-profile.html"><span>Account</span></a>
+                        <a href="/user/profile"><span>Account</span></a>
                         <a href="order.html"><span>Track Order</span></a>
                         <a href="faq.html"><span>Support</span></a>
                     </div>
@@ -11,7 +11,7 @@
                         <div class="header-top-contact">
 
                             <div class="divider"></div>
-                            <a href="#" class="top-contact email">
+                            <a href="/user/profile" class="top-contact email">
                                 <span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -20,8 +20,10 @@
                                             fill="black" />
                                     </svg>
                                 </span>
+
                                 <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
                                 <span class="contact-text">{{ session['username'] }}</span>
+
                             </a>
                         </div>
                     </div>
