@@ -19,7 +19,7 @@ class UserAddressDAO:
         db.session.commit()
 
     def view_address(self,user_id):
-        address_vo = UserAddressVO.query.filter_by(user_id=user_id).first()
+        address_vo = UserAddressVO.query.filter_by(user_id=user_id).all()
         return address_vo
 
     def update_address(self,address_vo):
