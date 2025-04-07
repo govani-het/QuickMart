@@ -32,14 +32,14 @@ def checkout_order():
     final_price = 0
 
     userAddressInfo = user_dao.view_address(user_id)
-    userinfo = user_dao.getUserinfo(user_id)
+
     city = city_dao.view_city()
     area = area_dao.view_area()
 
     user_cart_data = cart_dao.get_cart_data(user_id)
     for i in user_cart_data:
         final_price = final_price + i[1].total_price
-    return render_template('/user/checkout.html',userinfo=userinfo,city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,userAddressInfo=userAddressInfo)
+    return render_template('/user/checkout.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,userAddressInfo=userAddressInfo)
 
 @app.route('/user/ajax_city')
 def ajax_city():
