@@ -11,7 +11,12 @@ from base.com.vo.area_vo import AreaVO
 class AdminOrderDAO:
 
     def viewOrder(self):
-        order_list = db.session.query(UserAddressVO,OrderVO,CityVO,AreaVO).join(UserAddressVO,OrderVO.user_id==UserAddressVO.user_id).join(CityVO, UserAddressVO.city == CityVO.city_id).join(AreaVO, UserAddressVO.area == AreaVO.area_id).all()
+        order_list = db.session.query(OrderVO, UserAddressVO, CityVO, AreaVO). \
+            join(UserAddressVO,
+                 (OrderVO.user_id == UserAddressVO.user_id) & (OrderVO.address_id == UserAddressVO.address_id)). \
+            join(CityVO, UserAddressVO.city == CityVO.city_id). \
+            join(AreaVO, UserAddressVO.area == AreaVO.area_id). \
+            all()
         return order_list
 
     def viewOrderItem(self,order_id):

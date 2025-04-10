@@ -64,74 +64,39 @@
                     <div class="col-lg-6">
                         <div class="checkout-wrapper">
                             <div class="account-section billing-section box-shadows">
-                                <h5 class="wrapper-heading">Billing Details</h5>
-                                <div class="review-form">
-                                    <div class=" account-inner-form">
-                                        <div class="review-form-name">
-                                            {% if userAddressInfo %}
-                                                <input type="hidden" name="address_id" value="{{ userAddressInfo.address_id }}">
-                                            {% endif %}
-                                            <input type="hidden" name="address_id">
-                                            <label for="fname" class="form-label">UserName*</label>
-                                            <input type="text" id="username" name="username" value="{{ session['username'] }}" class="form-control" placeholder="UserName">
+                                {% if user_address_info %}
+                                    <h5 class="wrapper-heading" style="font-weight: 700; font-size: 40px;">Billing Details</h5>
+                                    {% for data in user_address_info %}
+                                        <div class="review-form"    >
+                                            <div class="col-md-12">
+                                                <div class="seller-info p-3 mb-3" style="border: 1px solid green; border-radius: 5px;">
+                                                    <div class="d-flex justify-content-between align-items-start">
+                                                        <h5 class="heading mb-3">Address</h5>
+                                                        <input type="radio" name="address_id" value="{{ data[0].address_id }}" style="margin-top: 5px;">
+                                                    </div>
+                                                    <div class="info-list d-flex">
+                                                        <div class="info-title me-3">
+                                                            <p><strong>Name:</strong></p>
+                                                            <p><strong>Email:</strong></p>
+                                                            <p><strong>Phone:</strong></p>
+                                                            <p><strong>Address:</strong></p>
+                                                            <p><strong>Zip:</strong></p>
+                                                        </div>
+                                                        <div class="info-details">
+                                                            <p>{{ data[0].username }}</p>
+                                                            <p>{{ data[0].email }}</p>
+                                                            <p>{{ data[0].phone }}</p>
+                                                            <p>{{ data[0].address }}, {{ data[2].area_name }} ,{{ data[1].city_name }}</p>
+                                                            <p>{{ data[0].pincode }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-
-                                    </div>
-                                    <div class=" account-inner-form">
-                                        <div class="review-form-name">
-                                            <label for="email" class="form-label">Email*</label>
-                                            <input type="email" id="email" class="form-control" name="email" value="{{ session['user_email'] }}"
-                                                placeholder="user@gmail.com">
-                                        </div>
-                                        <div class="review-form-name">
-                                            <label for="phone" class="form-label">Phone*</label>
-                                            <input type="tel" id="phone" class="form-control" name="phone" value="{{ session['user_phone'] }}"
-                                                placeholder="+880388**0899">
-                                        </div>
-                                    </div>
-                                    <div class="review-form-name">
-                                        <label for="country" class="form-label">City</label>
-                                        <select id="city" class="form-select" name="city" onchange="loadArea()">
-                                            <option disabled selected>Choose...</option>
-                                            {% for data in city %}
-                                                {% if data.city_id == userAddressInfo.city %}
-                                                    <option value="{{ data.city_id }}" selected>{{ data.city_name }}</option>
-                                                {% else %}
-                                                    <option value="{{ data.city_id }}">{{ data.city_name }}</option>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="review-form-name address-form">
-                                        <label for="address" class="form-label">Address*</label>
-                                        {% if userAddressInfo %}
-                                            <input type="text" id="address" name="address" class="form-control"
-                                                placeholder="Enter your Address" value="{{ userAddressInfo.address }}">
-                                        {% else %}
-                                            <input type="text" id="address" name="address" class="form-control"
-                                                placeholder="Enter your Address">
-                                        {% endif %}
-                                    </div>
-                                    <div class=" account-inner-form city-inner-form">
-                                        <div class="review-form-name">
-                                            <label for="area" class="form-label">Area</label>
-                                            <select id="area" class="form-select" name="area">
-                                                <option disabled>Choose...</option>
-                                                {%  for data in area %}
-
-                                                    <option value="{{ data[1].area_id }}" {% if userAddressInfo and data[1].area_id|int == userAddressInfo.area|int %} selected {% endif %}>{{ data[1].area_name }}</option>
-
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                        <div class="review-form-name">
-                                            <label for="number" class="form-label">Postcode / ZIP*</label>
-                                            <input type="number" id="number" value="{{ userAddressInfo.pincode }}" name="pincode" class="form-control" placeholder="0000">
-                                        </div>
-                                    </div>
-                                    <h5 class="wrapper-heading">Shipping Address</h5>
-
-                                </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <a href="/user/add_address'" class="shop-btn">Add Address</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

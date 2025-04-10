@@ -7,10 +7,6 @@ from base.com.vo.user_address_vo import UserAddressVO
 
 class UserAddressDAO:
 
-    def getUserinfo(self,user_id):
-        user = UserRegisterVO.query.filter_by(id=user_id).first()
-        return user
-
     def getArea(self,city_vo):
         area_vo = AreaVO.query.filter_by(area_city_id=city_vo.area_city_id).all()
         return area_vo
@@ -19,7 +15,7 @@ class UserAddressDAO:
         db.session.commit()
 
     def view_address(self,user_id):
-        address_vo = UserAddressVO.query.filter_by(user_id=user_id).all()
+        address_vo = db.session.query(UserAddressVO, CityVO, AreaVO).join(CityVO, UserAddressVO.city == CityVO.city_id).join(AreaVO, UserAddressVO.area == AreaVO.area_id).filter(UserAddressVO.user_id == user_id).all()
         return address_vo
 
     def update_address(self,address_vo):

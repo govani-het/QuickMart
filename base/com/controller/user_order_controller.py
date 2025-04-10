@@ -39,7 +39,7 @@ def checkout_order():
     user_cart_data = cart_dao.get_cart_data(user_id)
     for i in user_cart_data:
         final_price = final_price + i[1].total_price
-    return render_template('/user/test.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,userAddressInfo=userAddressInfo)
+    return render_template('/user/checkout.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,user_address_info=userAddressInfo)
 
 @app.route('/user/ajax_city')
 def ajax_city():
@@ -65,30 +65,12 @@ def place_order():
     cart_dao = CartDAO()
 
     user_id = session.get('user_id')
-
-# here user can add address or if user has already added address user can update it if user want
     address_id = request.form.get('address_id')
 
-    userAddressVO.user_id = user_id
-    userAddressVO.address_id = address_id
-    userAddressVO.username = request.form.get('username')
-    userAddressVO.email = request.form.get('email')
-    userAddressVO.phone = request.form.get('phone')
-    userAddressVO.address = request.form.get('address')
-    userAddressVO.city = request.form.get('city')
-    userAddressVO.area = request.form.get('area')
-    userAddressVO.pincode = request.form.get('pincode')
-
-    if address_id:
-        userAddressDAO.update_address(userAddressVO)
-    else:
-        userAddressDAO.add_address(userAddressVO)
 
 # here create new order
 
-    address = UserAddressVO.query.filter_by(user_id=user_id).first()
-
-    order_vo.address_id = address.address_id
+    order_vo.address_id = address_id
     order_vo.user_id = user_id
     order_vo.final_price = request.form.get('final_price')
     order_vo.status = 'Pending'

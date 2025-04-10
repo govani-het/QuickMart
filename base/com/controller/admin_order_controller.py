@@ -18,7 +18,7 @@ def view_order():
     admin_order_dao = AdminOrderDAO()
 
     order_list = admin_order_dao.viewOrder()
-
+    print(">>>>>>>>>>>>>>>>",order_list)
     return render_template('admin/viewOrder.html',order_list=order_list)
 
 @app.route('/admin/view_order_list')

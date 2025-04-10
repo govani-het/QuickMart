@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for,session
 
+from base.com.vo.user_address_vo import UserAddressVO
+
 from base.com.dao.user_address_dao import UserAddressDAO
 from base.com.dao.user_order_dao import OrderDAO
 from base.com.dao.area_dao import AreaDAO
@@ -9,12 +11,7 @@ from base import app
 
 @app.route('/user/profile')
 def user_profile():
-    user_dao = UserAddressDAO()
-
-    user_id = session.get('user_id')
-
-    user_data = user_dao.getUserinfo(user_id)
-    return render_template('user/userDashboard.html',user_data=user_data)
+    return render_template('user/userDashboard.html')
 
 
 @app.route('/user/userInfo')
@@ -22,16 +19,11 @@ def user_parsonalInfo():
 
     user_dao = UserAddressDAO()
     city_dao = CityDAO()
-    area_dao = AreaDAO()
-
     user_id = session.get('user_id')
 
-
-    city = city_dao.view_city()
-    area = area_dao.view_area()
     user_address_info = user_dao.view_address(user_id)
-    user_info = user_dao.getUserinfo(user_id)
-    return render_template('user/userInfo.html',user_info=user_info,user_address_info=user_address_info,city=city,area=area)
+    city = city_dao.view_city()
+    return render_template('user/addAddress.html',user_address_info=user_address_info,city=city)
 
 @app.route('/user/order')
 def user_order():
@@ -44,10 +36,39 @@ def user_order():
 
 @app.route('/user/address')
 def user_address():
+    user_dao = UserAddressDAO()
 
-    return render_template('user/address.html')
+    user_id = session.get('user_id')
+
+    user_address_info = user_dao.view_address(user_id)
+    return render_template('user/address.html',user_address_info=user_address_info)
 
 @app.route('/user/changePassword')
 def user_changePassword():
 
     return render_template('user/changePassword.html')
+
+@app.route('/user/add_address',methods=['POST'])
+def user_add_address():
+    user_dao = UserAddressDAO()
+    user_address_vo = UserAddressVO()
+    user_id = session.get('user_id')
+
+    address_id = request.form.get('address_id')
+    user_address_vo.address_id = address_id
+    user_address_vo.user_id = user_id
+    user_address_vo.username = request.form.get('username')
+    user_address_vo.email = request.form.get('email')
+    user_address_vo.phone = request.form.get('phone')
+    user_address_vo.address = request.form.get('address')
+    user_address_vo.city = request.form.get('city')
+    user_address_vo.area = request.form.get('area')
+    user_address_vo.pincode = request.form.get('pincode')
+
+    if address_id:
+        user_dao.update_address(user_address_vo)
+    else:
+        user_dao.add_address(user_address_vo)
+
+    user_address_info = user_dao.view_address(user_id)
+    return render_template('user/address.html',user_address_info=user_address_info)

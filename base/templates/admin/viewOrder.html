@@ -73,6 +73,7 @@
                                             <th>Address</th>
                                             <th>Total Price</th>
                                             <th>Order Item</th>
+                                            <th>Payment Mode</th>
                                             <th>Order Status</th>
                                             <th>Current Date</th>
                                         </tr>
@@ -80,11 +81,12 @@
                                         <tbody>
                                         {% for data in order_list %}
                                             <tr>
-                                                <td>{{ data[0].username }}</td>
-                                                <td>{{ data[0].phone }}</td>
-                                                <td>{{ data[0].address }}<br>{{ data[2].city_name }} <br> {{ data[3].area_name }}</td>
-                                                <td>{{ data[1].final_price }}</td>
-                                                <td><a href="/admin/view_order_list?order_id={{ data[1].order_id }}">view</a></td>
+                                                <td>{{ data[1].username }}</td>
+                                                <td>{{ data[1].phone }}</td>
+                                                <td>{{ data[1].address }}<br>{{ data[2].city_name }} <br> {{ data[3].area_name }}</td>
+                                                <td>{{ data[0].final_price }}</td>
+                                                <td><a href="/admin/view_order_list?order_id={{ data[0].order_id }}">view</a></td>
+                                                <td>{{ data[0].payment_method }}</td>
                                                 <td>
                                                    <select name="order_status" class="w-full appearance-none bg-white border border-gray-300 text-gray-700 text-sm px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 hover:border-blue-400 transition duration-150 ease-in-out">
                                                     <option value="Pending" selected>Pending</option>
@@ -95,7 +97,7 @@
                                                 </td>
 
 
-                                                <td>{{ data[1].current_date  }}</td>
+                                                <td>{{ data[0].current_date  }}</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>

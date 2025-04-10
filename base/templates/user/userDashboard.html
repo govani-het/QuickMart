@@ -68,7 +68,7 @@
                         <div >
                             <div class="user-profile">
                                 <div class="user-title">
-                                    <p class="paragraph">Hello, {{ user_data.username }}</p>
+                                    <p class="paragraph">Hello, {{ session['username'] }}</p>
                                     <h5 class="heading">Welcome to your Profile </h5>
                                 </div>
                                 <div class="profile-section">
@@ -86,9 +86,9 @@
 
                                                         </div>
                                                         <div class="info-details">
-                                                            <p>{{ user_data.username }}</p>
-                                                            <p>{{ user_data.email }}</p>
-                                                            <p>{{ user_data.phone }}</p>
+                                                            <p>{{ session['username'] }}</p>
+                                                            <p>{{ session['user_email'] }}</p>
+                                                            <p>{{ session['user_phone'] }}</p>
 
                                                         </div>
                                                     </div>
