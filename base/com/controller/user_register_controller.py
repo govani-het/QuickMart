@@ -7,6 +7,7 @@ from base.com.dao.category_dao import CategoryDAO
 from base.com.vo.user_register_vo import UserRegisterVO
 
 import os
+import bcrypt
 from base import app
 
 app.secret_key = 'qazwsxedcrfvtgbyhnujmiklop123456'
@@ -19,10 +20,15 @@ def addUserdata():
     user_dao = UserRegisterDAO()
 
     user_vo.username = request.form.get('username')
-    user_vo.password = request.form.get('password')
+    password = request.form.get('password')
     user_vo.email = request.form.get('email')
     user_vo.phone = request.form.get('phone')
 
+    salt = bcrypt.gensalt(rounds=12)
+    hashed_login_password = bcrypt.hashpw(password.encode("utf-8"),
+                                          salt)
+
+    user_vo.password = hashed_login_password
     user_dao.insertUserData(user_vo)
     return render_template('user/login.html')
 
