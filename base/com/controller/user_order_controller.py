@@ -2,14 +2,13 @@ import os
 from base import app
 from base import db
 
-from flask import Flask, render_template, request, redirect, url_for,session,jsonify
+from flask import render_template, request, redirect,session,jsonify
 
 #here all vo
-from base.com.vo.user_register_vo import UserRegisterVO
+
 from base.com.vo.user_address_vo import UserAddressVO
 from base.com.vo.user_order_item_vo import OrderItemVO
 from base.com.vo.user_order_vo import OrderVO
-from base.com.vo.cart_vo import CartVO
 from base.com.vo.area_vo import AreaVO
 
 
@@ -20,7 +19,9 @@ from base.com.dao.area_dao import AreaDAO
 from base.com.dao.city_dao import CityDAO
 from base.com.dao.cart_dao import CartDAO
 
+from base.com.controller.login_controller import login_required
 @app.route('/user/checkout_order')
+@login_required('user')
 def checkout_order():
     user_dao = UserAddressDAO()
     area_dao = AreaDAO()
@@ -42,6 +43,7 @@ def checkout_order():
     return render_template('/user/checkout.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,user_address_info=userAddressInfo)
 
 @app.route('/user/ajax_city')
+@login_required('user')
 def ajax_city():
     area_dao = UserAddressDAO()
     area_vo = AreaVO()
@@ -54,6 +56,7 @@ def ajax_city():
     return jsonify(ajax_area)
 
 @app.route('/user/place_order',methods=['POST'])
+@login_required('user')
 def place_order():
 
     userAddressDAO = UserAddressDAO()

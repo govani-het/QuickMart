@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for,session
+import os
+from base import app
 
 from base.com.dao.cart_dao import CartDAO
 from base.com.dao.user_register_dao import UserRegisterDAO
@@ -7,10 +9,11 @@ from base.com.dao.user_register_dao import UserRegisterDAO
 from base.com.vo.user_register_vo import UserRegisterVO
 from base.com.vo.cart_vo import CartVO
 
-import os
-from base import app
+
+from base.com.controller.login_controller import login_required
 
 @app.route('/user/add_cart', methods=['POST'])
+@login_required('user')
 def add_cart():
     cart_dao = CartDAO()
     cart_vo = CartVO()
@@ -51,6 +54,7 @@ def add_cart():
     return redirect(request.referrer)
 
 @app.route('/user/view_cart')
+@login_required('user')
 def view_cart():
     cart_dao = CartDAO()
 
@@ -59,6 +63,7 @@ def view_cart():
     return render_template('user/cart.html',user_cart_data=user_cart_data)
 
 @app.route('/user/delete_cart_item')
+@login_required('user')
 def delete_cart():
     cart_dao = CartDAO()
     cart_id = request.args.get('cart_id')
@@ -66,6 +71,7 @@ def delete_cart():
     return redirect('/user/view_cart')
 
 @app.route('/user/delete_all_cart_item')
+@login_required('user')
 def delete_all_cart_item():
     cart_dao = CartDAO()
     user_id = session.get('user_id')

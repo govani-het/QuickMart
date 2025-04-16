@@ -59,7 +59,8 @@
     <section class="product-cart product footer-padding">
         <div class="container">
             <div class="cart-section">
-                <table>
+                {% if user_cart_data %}
+                    <table>
                     <tbody>
                         <tr class="table-row table-top-row">
                             <td class="table-wrapper wrapper-product">
@@ -138,11 +139,17 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                {% else %}
+                    <h4>Your Cart is Empty</h4>
+                    <a href="/user/home" class="shop-btn">Home</a>
+                {% endif %}
             </div>
             <div class="wishlist-btn cart-btn">
-                <a href="/user/delete_all_cart_item" class="clean-btn">Clear Cart</a>
-                <a href="#" class="shop-btn update-btn">Update Cart</a>
-                <a href="/user/checkout_order" class="shop-btn">Proceed to Checkout</a>
+
+                {% if user_cart_data %}
+                    <a href="/user/delete_all_cart_item" class="clean-btn">Clear Cart</a>
+                    <a href="/user/checkout_order" class="shop-btn">Proceed to Checkout</a>
+                {% endif %}
             </div>
         </div>
     </section>

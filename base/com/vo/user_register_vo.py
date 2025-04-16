@@ -7,7 +7,8 @@ class UserRegisterVO(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     phone = db.Column(db.String(120), unique=True, nullable=False)
-
+    login_role = db.Column('login_role', db.String(100), nullable=False, default='user')
+    login_status = db.Column('login_status', db.Boolean, nullable=False, default=True)
 
     def as_dict(self):
         return {
@@ -15,7 +16,10 @@ class UserRegisterVO(db.Model):
             'username': self.username,
             'email': self.email,
             'phone': self.phone,
-            'password': self.password
+            'password': self.password,
+            'login_role': self.login_role,
+            'login_status': self.login_status
         }
+
 
     db.create_all()

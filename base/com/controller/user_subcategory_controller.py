@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for,jsonify
+from flask import render_template, request,jsonify
 
 from base.com.dao.user_subcategory_dao import UserSubcategoryDao
 
 from base import app
 
+from base.com.controller.login_controller import login_required
 @app.route('/user/subcategory')
+@login_required('user')
 def load_user_subcategory():
     subcategory_dao = UserSubcategoryDao()
 
@@ -17,6 +19,7 @@ def load_user_subcategory():
     return render_template('user/subCategoryList.html', subcategory_list=subcategory_list, product_list=product_list)
 
 @app.route('/user/ajax_product_list')
+@login_required('user')
 def load_user_ajax_product():
     subcategory_dao = UserSubcategoryDao()
     subcategory_id = request.args.get('subcategory_id')
@@ -28,6 +31,7 @@ def load_user_ajax_product():
     return jsonify(json_product_list)
 
 @app.route('/user/view_product')
+@login_required('user')
 def load_user_view_product():
     subcategory_dao = UserSubcategoryDao()
 

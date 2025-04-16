@@ -8,13 +8,15 @@ from base.com.dao.area_dao import AreaDAO
 from base.com.dao.city_dao import CityDAO
 
 from base import app
-
+from base.com.controller.login_controller import login_required
 @app.route('/user/profile')
+@login_required('user')
 def user_profile():
     return render_template('user/userDashboard.html')
 
 
 @app.route('/user/userInfo')
+@login_required('user')
 def user_parsonalInfo():
 
     user_dao = UserAddressDAO()
@@ -26,6 +28,7 @@ def user_parsonalInfo():
     return render_template('user/addAddress.html',user_address_info=user_address_info,city=city)
 
 @app.route('/user/order')
+@login_required('user')
 def user_order():
     order_dao = OrderDAO()
 
@@ -35,6 +38,7 @@ def user_order():
     return render_template('user/order.html',order_data=order_data)
 
 @app.route('/user/address')
+@login_required('user')
 def user_address():
     user_dao = UserAddressDAO()
 
@@ -44,11 +48,13 @@ def user_address():
     return render_template('user/address.html',user_address_info=user_address_info)
 
 @app.route('/user/changePassword')
+@login_required('user')
 def user_changePassword():
 
     return render_template('user/changePassword.html')
 
 @app.route('/user/add_address',methods=['POST'])
+@login_required('user')
 def user_add_address():
     user_dao = UserAddressDAO()
     user_address_vo = UserAddressVO()
