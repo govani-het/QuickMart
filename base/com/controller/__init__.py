@@ -11,3 +11,4 @@ from base.com.controller import user_order_controller
 from base.com.controller import admin_order_controller
 from base.com.controller import user_profile_controller
 from base.com.controller import login_controller
+from base.com.controller import user_address_controller

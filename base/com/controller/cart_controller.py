@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for,session
+from flask import Flask, render_template, request, redirect, url_for,session,jsonify
 import os
-from base import app
+from base import app,db
 
 from base.com.dao.cart_dao import CartDAO
 from base.com.dao.user_register_dao import UserRegisterDAO
@@ -77,3 +77,24 @@ def delete_all_cart_item():
     user_id = session.get('user_id')
     cart_dao.delete_cart_all_item(user_id)
     return redirect('/user/view_cart')
+
+@app.route('/user/update_cart')
+@login_required('user')
+def update_cart():
+    cart_vo = CartVO()
+
+    cart_id = request.args.get('cart_id')
+    quantity = request.args.get('quantity')
+
+    cart_data = CartVO.query.get(cart_id)
+
+    cart_vo.cart_id = cart_id
+    cart_vo.user_id = session.get('user_id')
+    cart_vo.product_id = cart_data.product_id
+    cart_vo.price = cart_data.price
+    cart_vo.quantity = quantity
+    cart_vo.total_price = cart_data.price * int(quantity)
+
+    db.session.merge(cart_vo)
+    db.session.commit()
+    return jsonify('Updated cart')

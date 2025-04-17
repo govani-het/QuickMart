@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 from base.com.dao.category_dao import CategoryDAO
 from base.com.vo.category_vo import CategoryVO
 from werkzeug.utils import secure_filename

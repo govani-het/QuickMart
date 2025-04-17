@@ -68,7 +68,8 @@
 
                          <div style="width: auto">
                             <div class="cart-section">
-                                <table>
+                                {% if order_data %}
+                                    <table>
                                     <tbody>
                                         <tr class="table-row table-top-row">
                                             <td class="table-wrapper wrapper-product">
@@ -145,6 +146,9 @@
                                         {% endfor %}
                                     </tbody>
                                 </table>
+                                {% else %}
+                                    <h4 style="color: red;margin-left: 400px">No Order Yet</h4>
+                                {% endif %}
                             </div>
                         </div>
 

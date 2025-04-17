@@ -21,3 +21,8 @@ class UserAddressDAO:
     def update_address(self,address_vo):
         db.session.merge(address_vo)
         db.session.commit()
+
+    def delete_address(self,address_vo):
+        user_address = UserAddressVO.query.get(address_vo.address_id)
+        db.session.delete(user_address)
+        db.session.commit()

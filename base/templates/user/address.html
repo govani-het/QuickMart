@@ -90,12 +90,17 @@
                                                             <p>{{ data[0].address }}, {{ data[2].area_name }} ,{{ data[1].city_name }}</p>
                                                             <p>{{ data[0].pincode }}</p>
                                                         </div>
+
                                                     </div>
+                                                    <a class="btn btn-success" style="margin-left: 800px;" href="/user/update_address?address_id={{ data[0].address_id }}">update</a>
+                                                    <a class="btn btn-danger" href="/user/delete_address?address_id={{ data[0].address_id }}">Delete</a>
                                                 </div>
                                             </div>
                                         </div>
                                     {% endfor %}
-
+                                    {% if not user_address_info %}
+                                        <a href="/user/load_add_address_page" class="shop-btn">Add Address</a>
+                                    {% endif %}
 
                                 </div>
                             </div>

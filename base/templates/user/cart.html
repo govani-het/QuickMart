@@ -14,7 +14,30 @@
     <!--title  -->
     <title>EcoShop | Cart</title>
 
+    <style>
+        .quantity {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* control spacing between buttons and input */
+}
 
+.quantity .minus,
+.quantity .plus {
+    background-color: #eee;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.quantity .number {
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+}
+
+    </style>
     <!--------------- swiper-css ---------------->
     <link rel="stylesheet" href="../../static/userResource/css/swiper10-bundle.min.css">
 
@@ -88,6 +111,7 @@
                             </td>
                         </tr>
                         {% for data in user_cart_data %}
+
                             <tr class="table-row ticket-row">
                             <td class="table-wrapper wrapper-product">
                                 <div class="wrapper">
@@ -107,15 +131,12 @@
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
                                     <div class="quantity">
-                                        <span class="minus">
-                                            -
-                                        </span>
-                                        <input type="number" name="quantity" class="number"
-                                           style="width: 25px;align-content: center" value="{{ data[1].quantity }}">
-                                        <span class="plus">
-                                            +
-                                        </span>
+                                        <span class="minus">-</span>
+                                        <input type="number" name="quantity" class="number" value="{{ data[1].quantity }}">
+                                        <span class="plus">+</span>
+                                        <input type="hidden" class="cart-id" value="{{ data[1].cart_id }}">
                                     </div>
+
                                 </div>
                             </td>
                             <td class="table-wrapper wrapper-total">
@@ -168,32 +189,46 @@
         const minusButton = quantityDiv.querySelector(".minus");
         const plusButton = quantityDiv.querySelector(".plus");
         const numberInput = quantityDiv.querySelector(".number");
-        const totalPriceElement = quantityDiv.closest("tr").querySelector(".total-price");
-        const productPrice = parseFloat(quantityDiv.closest("tr").querySelector(".main-price").textContent);
-
-        let quantity = parseInt(numberInput.value) || 1;
-
-        function updateTotalPrice() {
-            totalPriceElement.textContent = (quantity * productPrice).toFixed(2);
-        }
 
         plusButton.addEventListener("click", function () {
+            let quantity = parseInt(numberInput.value) || 1;
             quantity++;
             numberInput.value = quantity;
-            updateTotalPrice();
+            updateCart(this);
         });
 
         minusButton.addEventListener("click", function () {
-            if (quantity > 1) { // Prevent going below 1
+            let quantity = parseInt(numberInput.value) || 1;
+            if (quantity > 1) {
                 quantity--;
                 numberInput.value = quantity;
-                updateTotalPrice();
+                updateCart(this);
             }
         });
-
-        updateTotalPrice();
     });
 });
+
+
+
+</script>
+
+
+<script>
+    function updateCart(element) {
+        var quantityDiv = element.closest('.quantity');
+        var quantity = quantityDiv.querySelector('.number').value;
+        var cart_id = quantityDiv.querySelector('.cart-id').value;
+
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState === 4 && ajax.status === 200) {
+                alert("Cart updated");
+            }
+        };
+
+        ajax.open("GET", "/user/update_cart?cart_id=" + cart_id + "&quantity=" + quantity, true);
+        ajax.send();
+    }
 
 
 </script>
