@@ -1,14 +1,8 @@
 from flask import render_template, request, redirect, url_for,session,jsonify
-
 from base import app,db
 
 from base.com.dao.cart_dao import CartDAO
-from base.com.dao.user_register_dao import UserRegisterDAO
-
-
-from base.com.vo.user_register_vo import UserRegisterVO
 from base.com.vo.cart_vo import CartVO
-
 
 from base.com.controller.login_controller import login_required
 

@@ -6,7 +6,6 @@ from flask import render_template, request, redirect,session,jsonify
 
 #here all vo
 
-from base.com.vo.user_address_vo import UserAddressVO
 from base.com.vo.user_order_item_vo import OrderItemVO
 from base.com.vo.user_order_vo import OrderVO
 from base.com.vo.area_vo import AreaVO

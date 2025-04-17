@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import render_template
 from base.com.dao.category_dao import CategoryDAO
 from base import app
 

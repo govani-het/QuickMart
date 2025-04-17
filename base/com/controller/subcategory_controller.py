@@ -5,7 +5,6 @@ from base.com.dao.subcategory_dao import SubcategoryDAO
 
 
 from base.com.vo.subcategory_vo import SubCategoryVO
-from base.com.vo.category_vo import CategoryVO
 
 from base.com.controller.login_controller import login_required
 from base import app
