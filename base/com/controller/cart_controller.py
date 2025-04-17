@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for,session,jsonify
-import os
+from flask import render_template, request, redirect, url_for,session,jsonify
+
 from base import app,db
 
 from base.com.dao.cart_dao import CartDAO

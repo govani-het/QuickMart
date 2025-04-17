@@ -14,8 +14,8 @@ app.secret_key = 'qazwsxedcrfvtgbyhnujmiklop123456'
 @app.route('/user/register')
 def register_page():
     return render_template('user/register.html')
-@app.route('/user/addUserdata', methods=['POST'])
-def addUserdata():
+@app.route('/user/register_user_info', methods=['POST'])
+def add_user_data():
     user_vo = UserRegisterVO()
     user_dao = UserRegisterDAO()
 
@@ -29,6 +29,6 @@ def addUserdata():
                                           salt)
 
     user_vo.password = hashed_login_password
-    user_dao.insertUserData(user_vo)
+    user_dao.insert_user_data(user_vo)
     return render_template('user/login.html')
 

@@ -7,7 +7,7 @@ from base.com.vo.user_address_vo import UserAddressVO
 
 class UserAddressDAO:
 
-    def getArea(self,city_vo):
+    def get_area(self,city_vo):
         area_vo = AreaVO.query.filter_by(area_city_id=city_vo.area_city_id).all()
         return area_vo
     def add_address(self, address_vo):

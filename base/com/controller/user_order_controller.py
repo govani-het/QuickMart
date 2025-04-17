@@ -49,7 +49,7 @@ def ajax_city():
     area_vo = AreaVO()
 
     area_vo.area_city_id = request.args.get('city_id')
-    area_list = area_dao.getArea(area_vo)
+    area_list = area_dao.get_area(area_vo)
 
     ajax_area = [i.as_dict() for i in area_list]
 
@@ -59,17 +59,11 @@ def ajax_city():
 @login_required('user')
 def place_order():
 
-    userAddressDAO = UserAddressDAO()
-    userAddressVO = UserAddressVO()
-
-    order_item_vo = OrderItemVO()
     order_vo = OrderVO()
-
     cart_dao = CartDAO()
 
     user_id = session.get('user_id')
     address_id = request.form.get('address_id')
-
 
 # here create new order
 

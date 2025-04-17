@@ -25,9 +25,9 @@ def user_order():
     print(order_data)
     return render_template('user/order.html',order_data=order_data)
 
-@app.route('/user/changePassword')
+@app.route('/user/change_password')
 @login_required('user')
-def user_changePassword():
+def user_change_password():
 
     return render_template('user/changePassword.html')
 
