@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request,flash,redirect
 
 
 from base.com.dao.user_register_dao import UserRegisterDAO
@@ -27,8 +27,16 @@ def add_user_data():
     salt = bcrypt.gensalt(rounds=12)
     hashed_login_password = bcrypt.hashpw(password.encode("utf-8"),
                                           salt)
-
+    user_data = user_dao.user_info()
     user_vo.password = hashed_login_password
+    for data in user_data:
+        if data.email == user_vo.email:
+            flash('Email already registered', 'error')
+            return redirect('/user/register')
+        elif data.phone == user_vo.phone:
+            flash('Phone number already registered', 'error')
+            return redirect('/user/register')
+
     user_dao.insert_user_data(user_vo)
     return render_template('user/login.html')
 

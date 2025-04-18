@@ -11,7 +11,21 @@
     <link rel="icon" href="../../static/userResource/image/top-logo.png">
 
     <title>QuickMart | Register</title>
-
+    <style>
+        .flash-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
     <link rel="stylesheet" href="../../static/userResource/css/swiper10-bundle.min.css">
     <link rel="stylesheet" href="../../static/userResource/css/bootstrap-5.3.2.min.css">
     <link rel="stylesheet" href="../../static/userResource/css/nouislider.min.css">
@@ -20,6 +34,15 @@
 </head>
 
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <section class="login product footer-padding">
         <div class="container">
             <div class="login-section">
@@ -53,6 +76,8 @@
                                     <div class="login-btn text-center">
                                         <input type="submit" name="submit" value="Register" class="shop-btn">
                                     </div>
+                                    <span class="shop-account">Already have an Account?<a href="/">Log
+                                                        in</a></span>
                                 </form>
                             </div>
                         </div>
@@ -65,6 +90,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 
     <script>

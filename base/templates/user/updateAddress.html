@@ -1,0 +1,237 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords"
+        content="EcoShop, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="C:\Users\Het\Desktop\user\userResource\image\top-logo.png">
+
+    <!--title  -->
+    <title>EcoShop | Profile</title>
+
+
+    <!--------------- swiper-css ---------------->
+    <link rel="stylesheet" href="../../static/userResource/css/swiper10-bundle.min.css">
+
+    <!--------------- bootstrap-css ---------------->
+    <link rel="stylesheet" href="../../static/userResource/css/bootstrap-5.3.2.min.css">
+
+    <!---------------------- Range Slider ------------------->
+    <link rel="stylesheet" href="../../static/userResource/css/nouislider.min.css">
+
+    <!---------------------- Scroll ------------------->
+    <link rel="stylesheet" href="../../static/userResource/css/aos-3.0.0.css">
+
+    <!--------------- additional-css ---------------->
+    <link rel="stylesheet" href="../../static/userResource/css/style.css">
+
+
+</head>
+
+<body>
+
+
+    <!--------------- header-section --------------->
+    {% include 'user/header.html' %}
+    <!--------------- header-section-end --------------->
+
+    <!--------------- blog-tittle-section---------------->
+    <section class="blog about-blog">
+        <div class="container">
+
+            <div class="blog-heading about-heading">
+                <h1 class="heading">Update Address</h1>
+            </div>
+        </div>
+    </section>
+    <!--------------- blog-tittle-section-end---------------->
+
+    <!---------------user-profile-section---------------->
+    <section class="user-profile footer-padding">
+        <div class="container">
+            <div class="user-profile-section box-shadows">
+                <div class="dashboard-heading ">
+                    <h5 class="dashboard-title">User Options</h5>
+
+                </div>
+                <div class="user-dashboard">
+
+
+                    <!-- nav-content -->
+                    <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
+
+
+                        <div >
+                            <div class="checkout-wrapper">
+                            <button onclick="goBack()" class="btn btn-dark" style="height: 35px;width: 70px">Back</button>
+                            <div class="account-section billing-section box-shadows">
+                                <h5 class="wrapper-heading">User Profile</h5>
+                                <form action="/user/add_address" method="post">
+                                    <div class="review-form">
+                                        <div class=" account-inner-form">
+                                            <div class="review-form-name">
+                                                <label for="fname" class="form-label">UserName*</label>
+                                                <input type="hidden" name="address_id" value="{{ user_address_info.address_id }}">
+                                                <input type="text" id="username" name="username" value="{{ user_address_info.username }}" class="form-control" placeholder="UserName">
+                                            </div>
+
+                                        </div>
+                                        <div class=" account-inner-form">
+                                            <div class="review-form-name">
+                                                <label for="email" class="form-label">Email*</label>
+                                                <input type="email" id="email" class="form-control" name="email" value="{{ user_address_info.email }}"
+                                                    placeholder="user@gmail.com">
+                                            </div>
+                                            <div class="review-form-name">
+                                                <label for="phone" class="form-label">Phone*</label>
+                                                <input type="tel" id="phone" class="form-control" name="phone" value="{{ user_address_info.phone }}"
+                                                    placeholder="+880388**0899">
+                                            </div>
+                                        </div>
+                                        <div class="review-form-name">
+                                            <label for="country" class="form-label">City</label>
+                                            <select id="city" class="form-select" name="city" onchange="loadArea()">
+
+                                                {% for data in city %}
+                                                    {% if user_address_info.city | int == data.city_id %}
+                                                        <option value="{{ data.city_id }}" selected>{{ data.city_name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ data.city_id }}">{{ data.city_name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="review-form-name address-form">
+                                            <label for="address" class="form-label">Address*</label>
+                                            <input type="text" id="address" name="address" class="form-control" value="{{ user_address_info.address }}"
+                                                placeholder="Enter your Address">
+                                        </div>
+                                        <div class=" account-inner-form city-inner-form">
+                                            <div class="review-form-name">
+                                                <label for="area" class="form-label">Area</label>
+                                                <select id="area" class="form-select" name="area">
+                                                    {% for data in area %}
+                                                        <option value="{{ data[1].area_id }}"
+                                                            {% if user_address_info.area | int == data[1].area_id %}selected{% endif %}>
+                                                            {{ data[1].area_name }}
+                                                        </option>
+                                                    {% endfor %}
+
+                                                </select>
+                                            </div>
+                                            <div class="review-form-name">
+                                                <label for="number" class="form-label">Postcode / ZIP*</label>
+                                                <input type="number" id="number" value="{{ user_address_info.pincode }}" name="pincode" class="form-control" placeholder="0000">
+                                            </div>
+                                        </div><br>
+                                        <button type="submit" class="shop-btn">Add New
+                                                Address</button>
+
+
+
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- user-profile-section-end --------------->
+
+    <!--------------- footer-section--------------->
+    {% include 'user/footer.html' %}
+    <!--------------- footer-section-end--------------->
+
+
+
+
+
+    <script type="text/javascript">
+        function loadArea(){
+            var city_id = document.getElementById('city')
+            var area_id = document.getElementById('area')
+
+            area_id.innerHTML=''
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+
+                if (ajax.readyState === 4){
+                    var json = JSON.parse(ajax.responseText);
+
+                    for (var i=0; i<json.length; i++){
+                        var option = document.createElement("option");
+                        option.value = json[i].area_id;
+                        option.text = json[i].area_name;
+                        area_id.options.add(option);
+                    }
+                }
+            };
+            ajax.open('get',"/user/ajax_city?city_id=" + city_id.value,true);
+            ajax.send();
+        }
+    </script>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+    <!--------------- jQuery ---------------->
+    <script src="../../static/userResource/js/jquery_3.7.1.min.js"></script>
+
+    <!--------------- bootstrap-js ---------------->
+    <script src="../../static/userResource/js/bootstrap_5.3.2.bundle.min.js"></script>
+
+    <!--------------- Range-Slider-js ---------------->
+    <script src="../../static/userResource/js/nouislider.min.js"></script>
+
+    <!--------------- scroll-Animation-js ---------------->
+    <script src="../../static/userResource/js/aos-3.0.0.js"></script>
+
+    <!--------------- swiper-js ---------------->
+    <script src="../../static/userResource/js/swiper10-bundle.min.js"></script>
+
+    <!--------------- additional-js ---------------->
+    <script src="../../static/userResource/js/ecoshop.js"></script>
+
+    <script type="text/javascript">
+            function loadArea(){
+                var city_id = document.getElementById('city')
+                var area_id = document.getElementById('area')
+
+                area_id.innerHTML=''
+                var ajax = new XMLHttpRequest();
+                ajax.onreadystatechange = function(){
+
+                    if (ajax.readyState === 4){
+                        var json = JSON.parse(ajax.responseText);
+
+                        for (var i=0; i<json.length; i++){
+                            var option = document.createElement("option");
+                            option.value = json[i].area_id;
+                            option.text = json[i].area_name;
+                            area_id.options.add(option);
+                        }
+                    }
+                };
+                ajax.open('get',"/user/ajax_city?city_id=" + city_id.value,true);
+                ajax.send();
+            }
+        </script>
+
+</body>
+
+</html>

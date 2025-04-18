@@ -68,18 +68,18 @@ def user_delete_address():
     return redirect('/user/view_address')
 
 
-# @app.route('/user/update_address')
-# @login_required('user')
-# def user_edit_address():
-#     city_dao = CityDAO()
-#     area_dao = AreaDAO()
-#     user_address_dao = UserAddressDAO()
-#     user_address_vo = UserAddressVO()
-#
-#     user_address_vo.address_id = request.args.get('address_id')
-#
-#     user_address_data = user_address_dao.edit_address(user_address_vo)
-#     city = city_dao.view_city()
-#     area = area_dao.view_area()
-#     return render_template('user/addAddress.html',city=city,user_address_info=user_address_data)
+@app.route('/user/update_address')
+@login_required('user')
+def user_edit_address():
+    city_dao = CityDAO()
+    area_dao = AreaDAO()
+    user_address_dao = UserAddressDAO()
+    user_address_vo = UserAddressVO()
+
+    user_address_vo.address_id = request.args.get('address_id')
+
+    user_address_data = user_address_dao.edit_address(user_address_vo)
+    city = city_dao.view_city()
+    area = area_dao.view_area()
+    return render_template('user/updateAddress.html',city=city,area=area,user_address_info=user_address_data)
 
