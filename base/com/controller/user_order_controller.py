@@ -70,7 +70,7 @@ def place_order():
     order_vo.user_id = user_id
     order_vo.final_price = request.form.get('final_price')
     order_vo.status = 'Pending'
-    order_vo.payment_method = request.form.get('payment_type')
+    order_vo.payment_method = request.form.get('payment_method')
 
     db.session.add(order_vo)
     db.session.commit()

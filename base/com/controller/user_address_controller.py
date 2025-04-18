@@ -3,8 +3,8 @@ from flask import Flask, render_template, request, redirect,session
 from base.com.vo.user_address_vo import UserAddressVO
 
 from base.com.dao.user_address_dao import UserAddressDAO
-
 from base.com.dao.city_dao import CityDAO
+from base.com.dao.area_dao import AreaDAO
 
 from base import app
 from base.com.controller.login_controller import login_required
@@ -43,9 +43,7 @@ def user_add_address():
         user_dao.update_address(user_address_vo)
     else:
         user_dao.add_address(user_address_vo)
-
-    user_address_info = user_dao.view_address(user_id)
-    return render_template('user/address.html',user_address_info=user_address_info)
+    return redirect('/user/view_address')
 
 
 @app.route('/user/view_address')
@@ -68,4 +66,20 @@ def user_delete_address():
     user_address_vo.address_id = request.args.get('address_id')
     user_address_dao.delete_address(user_address_vo)
     return redirect('/user/view_address')
+
+
+# @app.route('/user/update_address')
+# @login_required('user')
+# def user_edit_address():
+#     city_dao = CityDAO()
+#     area_dao = AreaDAO()
+#     user_address_dao = UserAddressDAO()
+#     user_address_vo = UserAddressVO()
+#
+#     user_address_vo.address_id = request.args.get('address_id')
+#
+#     user_address_data = user_address_dao.edit_address(user_address_vo)
+#     city = city_dao.view_city()
+#     area = area_dao.view_area()
+#     return render_template('user/addAddress.html',city=city,user_address_info=user_address_data)
 

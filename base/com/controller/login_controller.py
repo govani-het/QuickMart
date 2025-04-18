@@ -213,6 +213,7 @@ def admin_validate_login():
                                         value=refresh,
                                         max_age=timedelta(hours=1))
 
+                    session.permanent = True
                     session['user_id'] = user_data.id
                     session['username'] = user_data.username
                     session['email'] = user_data.email

@@ -3,6 +3,9 @@
 <html lang="en">
 
 <head>
+
+
+
     <meta charset="utf-8">
     <meta name="keywords"
         content="EcoShop, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
@@ -92,9 +95,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="/user/load_add_address_page" class="shop-btn">Add Address</a>
+
                                         </div>
+
                                     {% endfor %}
+                                    <a href="/user/load_add_address_page" class="shop-btn">Add Address</a>
                                 {% else %}
                                     <a href="/user/load_add_address_page" class="shop-btn">Add Address</a>
                                 {% endif %}
@@ -135,19 +140,22 @@
                                     <div class="subtotal payment-type">
 
                                         <div class="checkbox-item">
-                                            <input type="radio" id="cash" name="payment_type" value="COD">
+                                            <input type="radio" id="cash" name="payment_method" value="COD">
                                             <div class="cash">
                                                 <h5 class="wrapper-heading">Cash on Delivery</h5>
                                             </div>
                                         </div>
                                         <div class="checkbox-item">
-                                            <input type="radio" id="credit" name="payment_type" value="UPI">
+                                            <input type="radio" id="credit" name="payment_method" value="UPI">
                                             <div class="credit">
                                                 <h5 class="wrapper-heading">UPI</h5>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="shop-btn">Place Order Now</button>
+                                    <button class="shop-btn">
+                                        Place Order
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -165,7 +173,7 @@
 
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
         function loadArea(){
             var city_id = document.getElementById('city')
             var area_id = document.getElementById('area')
@@ -189,6 +197,7 @@
             ajax.send();
         }
     </script>
+
     <!--------------- jQuery ---------------->
     <script src="../../static/userResource/js/jquery_3.7.1.min.js"></script>
 
@@ -207,7 +216,7 @@
     <!--------------- additional-js ---------------->
     <script src="../../static/userResource/js/ecoshop.js"></script>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

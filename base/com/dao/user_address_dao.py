@@ -26,3 +26,7 @@ class UserAddressDAO:
         user_address = UserAddressVO.query.get(address_vo.address_id)
         db.session.delete(user_address)
         db.session.commit()
+
+    def edit_address(self, address_vo):
+        address_vo = UserAddressVO.query.filter_by(address_id=address_vo.address_id).first()
+        return address_vo

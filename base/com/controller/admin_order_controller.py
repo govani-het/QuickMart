@@ -1,7 +1,8 @@
-from base import app
+from base import app,db
 
-from flask import render_template, request
+from flask import render_template, request,jsonify
 
+from base.com.vo.user_order_vo import OrderVO
 from base.com.dao.admin_order_dao import AdminOrderDAO
 from base.com.controller.login_controller import login_required
 @app.route('/admin/view_order')
@@ -20,3 +21,17 @@ def view_order_list():
     order_item_list = admin_order_dao.view_order_item(order_id)
 
     return render_template('admin/viewOrderItem.html',order_item_list=order_item_list)
+
+
+@app.route('/update_order_status', methods=['POST'])
+def update_order_status():
+    data = request.get_json()
+    order_id = data['order_id']
+    status = data['status']
+
+    order = OrderVO.query.get(order_id)
+    if order:
+        order.status = status
+        db.session.commit()
+        return jsonify({'success': True})
+    return jsonify({'success': False})
