@@ -4,6 +4,6 @@ services:
     env: python
     buildCommand: |
       python -m venv venv
-      venv/Scripts/activate  # For Windows; use venv/bin/activate for Linux/macOS
+      venv/Scripts/activate
       pip install -r requirements.txt
     startCommand: "gunicorn app:app"
