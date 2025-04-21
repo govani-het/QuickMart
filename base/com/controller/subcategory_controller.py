@@ -17,8 +17,9 @@ def add_subcategory():
         subcategory_category_list = subcategory_dao.category_data()
         print(subcategory_category_list)
         return render_template('admin/addSubcategory.html', subcategory_category_list=subcategory_category_list)
-    except:
-        return render_template('admin/viewError.html')
+    except Exception as ex:
+        print("admin_load_subcategory route exception occured>>>>>>>>", ex)
+        return render_template('admin/viewError.html',ex=ex)
 @app.route('/admin/insert_subcategory', methods=['POST'])
 @login_required('admin')
 def insert_subcategory():
@@ -32,8 +33,9 @@ def insert_subcategory():
 
         subcategory_dao.insert_subcategory(subcategory_vo)
         return redirect('/admin/add_subcategory')
-    except:
-        return render_template('admin/viewError.html')
+    except Exception as ex:
+        print("insert_subcategory route exception occured>>>>>>>>", ex)
+        return render_template('admin/viewError.html',ex=ex)
 @app.route('/admin/view_subcategory')
 @login_required('admin')
 def view_subcategory():
@@ -41,8 +43,9 @@ def view_subcategory():
         subcategory_dao = SubcategoryDAO()
         subcategory_list = subcategory_dao.view_subcategory()
         return render_template('admin/viewSubcategory.html',subcategory_list=subcategory_list)
-    except:
-        return render_template('admin/viewError.html')
+    except Exception as ex:
+        print("admin_view_subcategory route exception occured>>>>>>>>", ex)
+        return render_template('admin/viewError.html',ex=ex)
 @app.route('/admin/delete_subcategory')
 @login_required('admin')
 def delete_subcategory():
@@ -53,8 +56,9 @@ def delete_subcategory():
 
         subcategory_dao.delete_subcategory(subcategory_id)
         return redirect('/admin/view_subcategory')
-    except:
-        return render_template('admin/viewError.html')
+    except Exception as ex:
+        print("admin_load_category route exception occured>>>>>>>>", ex)
+        return render_template('admin/viewError.html',ex=ex)
 @app.route('/admin/edit_subcategory')
 @login_required('admin')
 def edit_subcategory():
@@ -71,7 +75,8 @@ def edit_subcategory():
         category_vo_list = category_dao.view_category()
 
         return render_template('/admin/editSubcategory.html', subcategory_vo_list=subcategory_vo_list, category_vo_list=category_vo_list)
-    except:
+    except Exception as ex:
+        print("edit_subcategory route exception occured>>>>>>>>", ex)
         return render_template('admin/viewError.html')
 
 @app.route('/admin/update_subcategory', methods=['POST'])
@@ -89,5 +94,6 @@ def update_subcategory():
 
         subcategory_dao.update_subcategory(subcategory_vo)
         return redirect('/admin/view_subcategory')
-    except:
+    except Exception as ex:
+        print("admin_update_category route exception occured>>>>>>>>", ex)
         return render_template('admin/viewError.html')

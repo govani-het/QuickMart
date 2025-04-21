@@ -24,6 +24,7 @@ def add_product():
         category_list = category_dao.view_category()
         return render_template('admin/addProduct.html',category_list=category_list)
     except:
+
         return render_template('admin/viewError.html')
 @app.route('/ajax_subcategory_product')
 @login_required('admin')

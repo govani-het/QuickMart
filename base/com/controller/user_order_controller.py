@@ -22,77 +22,82 @@ from base.com.controller.login_controller import login_required
 @app.route('/user/checkout_order')
 @login_required('user')
 def checkout_order():
-    user_dao = UserAddressDAO()
-    area_dao = AreaDAO()
-    city_dao = CityDAO()
-    cart_dao = CartDAO()
+    try:
+        user_dao = UserAddressDAO()
+        area_dao = AreaDAO()
+        city_dao = CityDAO()
+        cart_dao = CartDAO()
 
-    user_id = session.get('user_id')
+        user_id = session.get('user_id')
 
-    final_price = 0
+        final_price = 0
 
-    userAddressInfo = user_dao.view_address(user_id)
+        userAddressInfo = user_dao.view_address(user_id)
 
-    city = city_dao.view_city()
-    area = area_dao.view_area()
+        city = city_dao.view_city()
+        area = area_dao.view_area()
 
-    user_cart_data = cart_dao.get_cart_data(user_id)
-    for i in user_cart_data:
-        final_price = final_price + i[1].total_price
-    return render_template('/user/checkout.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,user_address_info=userAddressInfo)
-
+        user_cart_data = cart_dao.get_cart_data(user_id)
+        for i in user_cart_data:
+            final_price = final_price + i[1].total_price
+        return render_template('/user/checkout.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,user_address_info=userAddressInfo)
+    except:
+        return render_template('user/viewError.html')
 @app.route('/user/ajax_city')
 @login_required('user')
 def ajax_city():
-    area_dao = UserAddressDAO()
-    area_vo = AreaVO()
+    try:
+        area_dao = UserAddressDAO()
+        area_vo = AreaVO()
 
-    area_vo.area_city_id = request.args.get('city_id')
-    area_list = area_dao.get_area(area_vo)
+        area_vo.area_city_id = request.args.get('city_id')
+        area_list = area_dao.get_area(area_vo)
 
-    ajax_area = [i.as_dict() for i in area_list]
+        ajax_area = [i.as_dict() for i in area_list]
 
-    return jsonify(ajax_area)
-
+        return jsonify(ajax_area)
+    except:
+        return render_template('user/viewError.html')
 @app.route('/user/place_order',methods=['POST'])
 @login_required('user')
 def place_order():
+    try:
+        order_vo = OrderVO()
+        cart_dao = CartDAO()
 
-    order_vo = OrderVO()
-    cart_dao = CartDAO()
+        user_id = session.get('user_id')
+        address_id = request.form.get('address_id')
 
-    user_id = session.get('user_id')
-    address_id = request.form.get('address_id')
+    # here create new order
 
-# here create new order
+        order_vo.address_id = address_id
+        order_vo.user_id = user_id
+        order_vo.final_price = request.form.get('final_price')
+        order_vo.status = 'Pending'
+        order_vo.payment_method = request.form.get('payment_method')
 
-    order_vo.address_id = address_id
-    order_vo.user_id = user_id
-    order_vo.final_price = request.form.get('final_price')
-    order_vo.status = 'Pending'
-    order_vo.payment_method = request.form.get('payment_method')
-
-    db.session.add(order_vo)
-    db.session.commit()
-
-# now we move cart item to order item table
-
-
-    cart_data = cart_dao.get_cart_data(user_id)
-
-    for item in cart_data:
-        order_item_vo = OrderItemVO()
-        order_item_vo.order_id = order_vo.order_id
-        order_item_vo.user_id = user_id
-        order_item_vo.product_id = item[1].product_id
-        order_item_vo.quantity = item[1].quantity
-        order_item_vo.price = item[1].price
-        order_item_vo.total_price = item[1].total_price
-
-        db.session.add(order_item_vo)
+        db.session.add(order_vo)
         db.session.commit()
-    cart_dao.delete_cart_all_item(user_id)
 
-    return redirect('/user/view_cart')
+    # now we move cart item to order item table
 
 
+        cart_data = cart_dao.get_cart_data(user_id)
+
+        for item in cart_data:
+            order_item_vo = OrderItemVO()
+            order_item_vo.order_id = order_vo.order_id
+            order_item_vo.user_id = user_id
+            order_item_vo.product_id = item[1].product_id
+            order_item_vo.quantity = item[1].quantity
+            order_item_vo.price = item[1].price
+            order_item_vo.total_price = item[1].total_price
+
+            db.session.add(order_item_vo)
+            db.session.commit()
+        cart_dao.delete_cart_all_item(user_id)
+
+        return redirect('/user/view_cart')
+
+    except:
+        return render_template('user/viewError.html')
