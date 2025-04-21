@@ -26,8 +26,6 @@ from base.com.controller.login_controller import login_required
 def checkout_order():
     try:
         user_dao = UserAddressDAO()
-        area_dao = AreaDAO()
-        city_dao = CityDAO()
         cart_dao = CartDAO()
 
         user_id = session.get('user_id')
@@ -36,31 +34,10 @@ def checkout_order():
 
         userAddressInfo = user_dao.view_address(user_id)
 
-        city = city_dao.view_city()
-        area = area_dao.view_area()
-
         user_cart_data = cart_dao.get_cart_data(user_id)
         for i in user_cart_data:
             final_price = final_price + i[1].total_price
-        return render_template('/user/checkout.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,user_address_info=userAddressInfo)
-    except:
-        return render_template('user/viewError.html')
-
-
-#Handles an AJAX request to fetch areas based on the selected city and returns them in JSON format.
-@app.route('/user/ajax_city')
-@login_required('user')
-def ajax_city():
-    try:
-        area_dao = UserAddressDAO()
-        area_vo = AreaVO()
-
-        area_vo.area_city_id = request.args.get('city_id')
-        area_list = area_dao.get_area(area_vo)
-
-        ajax_area = [i.as_dict() for i in area_list]
-
-        return jsonify(ajax_area)
+        return render_template('/user/checkout.html',user_cart_data=user_cart_data,final_price=final_price,user_address_info=userAddressInfo)
     except:
         return render_template('user/viewError.html')
 
