@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'mysql+pymysql://root:root@localhost:3307/egrocery_db'
+    'postgresql://quickmart_user:8bFtIGpJCGBa3WosNW3DllH5lB2zl42a@dpg-d02fsaeuk2gs73eekk70-a/quickmart'
 
 app.config['SQLALCHEMY_MAX_OVERFLOW'] = 0
 app.app_context().push()
