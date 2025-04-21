@@ -5,6 +5,8 @@ from base.com.dao.user_subcategory_dao import UserSubcategoryDao
 from base import app
 
 from base.com.controller.login_controller import login_required
+
+#Displays the list of subcategories and the corresponding products for a specific category.
 @app.route('/user/subcategory')
 @login_required('user')
 def load_user_subcategory():
@@ -21,7 +23,7 @@ def load_user_subcategory():
     except:
         return render_template('user/viewError.html')
 
-
+#Loads the list of products dynamically using AJAX for a given subcategory.
 @app.route('/user/ajax_product_list')
 @login_required('user')
 def load_user_ajax_product():
@@ -36,6 +38,8 @@ def load_user_ajax_product():
         return jsonify(json_product_list)
     except:
         return render_template('user/viewError.html')
+
+#Displays detailed information about a specific product.
 @app.route('/user/view_product')
 @login_required('user')
 def load_user_view_product():

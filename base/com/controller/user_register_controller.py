@@ -8,12 +8,16 @@ import bcrypt
 from base import app
 
 app.secret_key = 'qazwsxedcrfvtgbyhnujmiklop123456'
+
+#Displays the user registration page.
 @app.route('/user/register')
 def register_page():
     try:
         return render_template('user/register.html')
     except:
         return render_template('user/viewError.html')
+
+#Registers a new user by saving their information to the database after validating input.
 @app.route('/user/register_user_info', methods=['POST'])
 def add_user_data():
     try:

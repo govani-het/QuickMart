@@ -19,6 +19,8 @@ from base.com.dao.city_dao import CityDAO
 from base.com.dao.cart_dao import CartDAO
 
 from base.com.controller.login_controller import login_required
+
+#Renders the checkout page, displaying the user's address, available cities and areas, and cart data with the final price.
 @app.route('/user/checkout_order')
 @login_required('user')
 def checkout_order():
@@ -43,6 +45,9 @@ def checkout_order():
         return render_template('/user/checkout.html',city=city,area=area,user_cart_data=user_cart_data,final_price=final_price,user_address_info=userAddressInfo)
     except:
         return render_template('user/viewError.html')
+
+
+#Handles an AJAX request to fetch areas based on the selected city and returns them in JSON format.
 @app.route('/user/ajax_city')
 @login_required('user')
 def ajax_city():
@@ -58,6 +63,9 @@ def ajax_city():
         return jsonify(ajax_area)
     except:
         return render_template('user/viewError.html')
+
+
+#Creates a new order, transfers the cart items to the order items table, and clears the user's cart.
 @app.route('/user/place_order',methods=['POST'])
 @login_required('user')
 def place_order():

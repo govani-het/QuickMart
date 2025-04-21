@@ -7,6 +7,8 @@ from base.com.dao.user_order_dao import OrderDAO
 from base import app
 from base.com.controller.login_controller import login_required
 
+
+#Displays the user's dashboard or profile page.
 @app.route('/user/profile')
 @login_required('user')
 def user_profile():
@@ -15,6 +17,8 @@ def user_profile():
     except:
         return render_template('user/viewError.html')
 
+
+#Displays the user's order history.
 @app.route('/user/order')
 @login_required('user')
 def user_order():
@@ -27,6 +31,8 @@ def user_order():
         return render_template('user/order.html',order_data=order_data)
     except:
         return render_template('user/viewError.html')
+
+#Renders the change password page for the user.
 @app.route('/user/change_password')
 @login_required('user')
 def user_change_password():

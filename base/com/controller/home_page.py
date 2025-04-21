@@ -8,6 +8,9 @@ def home_page():
         return render_template('user/login.html')
     except:
         return render_template('user/viewError.html')
+
+
+#Displays the home page for users after they log in. It shows a list of categories for the user to browse.
 @app.route("/user/home")
 def user_home_page():
     try:
@@ -16,6 +19,8 @@ def user_home_page():
         return render_template('user/index.html', category_list=category_vo_list)
     except:
         return render_template('user/viewError.html')
+
+#Displays the home page for administrators after they log in.
 @app.route("/admin/home")
 def admin_home_page():
     try:

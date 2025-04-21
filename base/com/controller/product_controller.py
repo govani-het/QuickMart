@@ -16,6 +16,8 @@ from base.com.controller.login_controller import login_required
 PRODUCT_FOLDER = 'base/static/adminResources/product/'
 app.config['PRODUCT_FOLDER'] = PRODUCT_FOLDER
 
+
+#Displays the add product page with a list of available categories.
 @app.route('/admin/add_product')
 @login_required('admin')
 def add_product():
@@ -26,6 +28,8 @@ def add_product():
     except:
 
         return render_template('admin/viewError.html')
+
+#Fetches subcategories based on selected category using AJAX for dynamic subcategory loading in the product form.
 @app.route('/ajax_subcategory_product')
 @login_required('admin')
 def add_subcategory_product():
@@ -41,6 +45,8 @@ def add_subcategory_product():
         return jsonify(ajax_product_subcategory)
     except:
         return render_template('admin/viewError.html')
+
+#Inserts a new product into the database with the provided form data and uploads the product image to the server.
 @app.route('/admin/insert_product', methods=['POST'])
 @login_required('admin')
 def insert_product():
@@ -75,6 +81,8 @@ def insert_product():
         return redirect('/admin/add_product')
     except:
         return render_template('admin/viewError.html')
+
+#Displays all the products for admin to view.
 @app.route('/admin/view_product')
 @login_required('admin')
 def view_product():
@@ -84,6 +92,8 @@ def view_product():
         return render_template('/admin/viewProduct.html',product_list=product_list)
     except:
         return render_template('admin/viewError.html')
+
+#Deletes a product from the database based on the provided product ID.
 @app.route('/admin/delete_product')
 @login_required('admin')
 def delete_product():
@@ -95,6 +105,8 @@ def delete_product():
         return redirect('/admin/view_product')
     except:
         return render_template('admin/viewError.html')
+
+#Fetches the existing product data to be edited and displays it in the form, with pre-selected category and subcategory.
 @app.route('/admin/edit_product')
 @login_required('admin')
 def edit_product():
@@ -118,6 +130,8 @@ def edit_product():
         return render_template('/admin/editProduct.html',product_list=product_list,subcategory_list=subcategory_list,category_list=category_list)
     except:
         return render_template('admin/viewError.html')
+
+#Updates the product details and image based on the submitted form data.
 @app.route('/admin/update_product',methods=['POST'])
 @login_required('admin')
 def update_product():

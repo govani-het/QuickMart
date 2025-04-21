@@ -5,6 +5,9 @@ from flask import render_template, request,jsonify
 from base.com.vo.user_order_vo import OrderVO
 from base.com.dao.admin_order_dao import AdminOrderDAO
 from base.com.controller.login_controller import login_required
+
+
+#Displays a list of all user orders for the admin.
 @app.route('/admin/view_order')
 @login_required('admin')
 def view_order():
@@ -14,6 +17,8 @@ def view_order():
         return render_template('admin/viewOrder.html',order_list=order_list)
     except:
         return render_template('user/viewError.html')
+
+#Displays the items of a specific order selected by the admin.
 @app.route('/admin/view_order_list')
 @login_required('admin')
 def view_order_list():
@@ -27,6 +32,8 @@ def view_order_list():
     except:
         return render_template('user/viewError.html')
 
+
+#Updates the status (e.g., pending, shipped, delivered) of a specific order using an AJAX request.
 @app.route('/update_order_status', methods=['POST'])
 def update_order_status():
     try:

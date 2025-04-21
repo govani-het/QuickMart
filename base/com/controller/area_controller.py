@@ -6,6 +6,9 @@ from base.com.dao.area_dao import AreaDAO
 
 from base.com.vo.area_vo import AreaVO
 from base.com.controller.login_controller import login_required
+
+
+#Display the form to add a new area, with a dropdown list of cities.
 @app.route('/admin/add_area')
 @login_required('admin')
 def add_area():
@@ -15,6 +18,8 @@ def add_area():
         return render_template('/admin/addArea.html',city_list=city_list)
     except:
         return render_template('admin/viewError.html')
+
+#Handles form submission to insert a new area into the database.
 @app.route('/admin/insert_area',methods=['POST'])
 @login_required('admin')
 def insert_area():
@@ -29,6 +34,9 @@ def insert_area():
         return redirect('/admin/add_area')
     except:
         return render_template('admin/viewError.html')
+
+
+#Displays all area records from the database with their corresponding city.
 @app.route('/admin/view_area')
 @login_required('admin')
 def view_area():
@@ -39,6 +47,9 @@ def view_area():
         return render_template('/admin/viewArea.html',area_list=area_list)
     except:
         return render_template('admin/viewError.html')
+
+
+#Deletes an area from the database using the area_id passed as a query parameter.
 @app.route('/admin/delete_area')
 @login_required('admin')
 def delete_area():
@@ -51,6 +62,8 @@ def delete_area():
         return redirect('/admin/view_area')
     except:
         return render_template('admin/viewError.html')
+
+#Loads the form with current area data and city list for editing.
 @app.route('/admin/edit_area')
 @login_required('admin')
 def edit_area():
@@ -66,6 +79,9 @@ def edit_area():
         return render_template('/admin/editArea.html',area_list=area_list,city_list=city_list)
     except:
         return render_template('admin/viewError.html')
+
+
+#Updates area information in the database with the data submitted from the edit form.
 @app.route('/admin/update_area',methods=['POST'])
 @login_required('admin')
 def update_area():
