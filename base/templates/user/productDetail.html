@@ -41,16 +41,17 @@
 <!--------------- products-info-section--------------->
 <section class="product product-info">
     <div class="container">
-        <div class="blog-bradcrum">
-            <span><a href="index.html">Home</a></span>
-            <span class="devider">/</span>
-            <span><a href="product-sidebar.html">Shop</a></span>
-            <span class="devider">/</span>
-            <span><a href="#">Product Details</a></span>
-        </div>
+
 
         {% for data in product_list %}
             <form action="/user/add_cart" method="POST">
+                <div class="blog-bradcrum">
+                    <span><a href="index.html">Home</a></span>
+                    <span class="devider">/</span>
+                    <span><a href="/user/subcategory?category_id={{ data.product_category_id }}">Shop</a></span>
+                    <span class="devider">/</span>
+                    <span><a href="#">Product Details</a></span>
+                </div>
                 <div class="product-info-section">
                     <div class="row ">
                         <div class="col-md-6">

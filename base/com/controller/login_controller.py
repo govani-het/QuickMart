@@ -8,7 +8,6 @@ from flask import render_template, redirect, request, url_for, make_response, \
     flash, session
 
 
-
 from base.com.dao.category_dao import CategoryDAO
 from base.com.dao.login_dao import LoginDAO
 from base.com.dao.device_info_dao import DeviceInfoDAO
@@ -157,12 +156,12 @@ def admin_validate_login():
         user_data = login_dao.check_login_username(login_vo)
 
         if not user_data:
-            error_message = 'username is incorrect !'
-            flash(error_message)
+
+            flash('username or password is incorrect !','error')
             return redirect('/')
         elif user_data.login_status != 1:
-            error_message = 'You have been temporarily blocked by website admin !'
-            flash(error_message)
+
+            flash('You have been temporarily blocked by website admin !', 'error')
             return redirect('/')
         else:
             email = user_data.email
