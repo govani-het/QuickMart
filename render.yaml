@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: quickmart-web
-    env: python
-    buildCommand: |
-      python -m venv venv
-      venv/Scripts/activate
-      pip install -r requirements.txt
-    startCommand: "gunicorn app:app"
