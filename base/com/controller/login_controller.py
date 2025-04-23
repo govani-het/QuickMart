@@ -157,7 +157,7 @@ def admin_validate_login():
 
         if not user_data:
 
-            flash('username or password is incorrect !','error')
+            flash('username is incorrect !','error')
             return redirect('/')
         elif user_data.login_status != 1:
 
@@ -221,8 +221,8 @@ def admin_validate_login():
                 else:
                     return admin_logout_session()
             else:
-                error_message = 'password is incorrect !'
-                flash(error_message)
+
+                flash('password is incorrect !','error')
                 return redirect('/')
     except Exception as ex:
         print("admin_validate_login route exception occured>>>>>>>>>>", ex)

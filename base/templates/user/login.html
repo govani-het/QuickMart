@@ -67,33 +67,26 @@
                                         <h5 class="comment-title">Log In</h5>
                                         <img src="../../static/userResource/image/vector-line.png" alt="img">
                                     </div>
+                                    {% with messages = get_flashed_messages(with_categories=true) %}
+                                      {% if messages %}
+                                        {% for category, message in messages %}
+                                          <div class="flash-message {{ category }}">
+                                            {{ message }}
+                                          </div>
+                                        {% endfor %}
+                                      {% endif %}
+                                    {% endwith %}
                                     <div class="review-inner-form ">
                                         <div class="review-form-name">
                                             <label for="email" class="form-label">Email Address**</label>
                                             <input type="email" id="email" name="email" class="form-control" placeholder="Email">
-                                                {% with messages = get_flashed_messages(with_categories=true) %}
-                                                  {% if messages %}
-                                                    {% for category, message in messages %}
-                                                      <div class="flash-message {{ category }}">
-                                                        {{ message }}
-                                                      </div>
-                                                    {% endfor %}
-                                                  {% endif %}
-                                                {% endwith %}
+
                                         </div>
                                         <div class="review-form-name">
                                             <label for="password" class="form-label">Password*</label>
                                             <input type="password" id="password" name="password" class="form-control"
                                                 placeholder="password">
-                                            {% with messages = get_flashed_messages(with_categories=true) %}
-                                              {% if messages %}
-                                                {% for category, message in messages %}
-                                                  <div class="flash-message {{ category }}">
-                                                    {{ message }}
-                                                  </div>
-                                                {% endfor %}
-                                              {% endif %}
-                                            {% endwith %}
+
                                         </div>
 
                                     </div>
