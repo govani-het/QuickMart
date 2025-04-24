@@ -109,6 +109,6 @@ def update_cart():
 
         db.session.merge(cart_vo)
         db.session.commit()
-        return jsonify('Updated cart')
+        return redirect('/user/view_cart')
     except:
         return render_template('user/viewError.html')

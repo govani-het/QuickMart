@@ -7,7 +7,9 @@ from datetime import timedelta, datetime
 from flask import render_template, redirect, request, url_for, make_response, \
     flash, session
 
-
+from base.com.dao.user_register_dao import UserRegisterDAO
+from base.com.dao.product_dao import ProductDAO
+from base.com.dao.admin_order_dao import AdminOrderDAO
 from base.com.dao.category_dao import CategoryDAO
 from base.com.dao.login_dao import LoginDAO
 from base.com.dao.device_info_dao import DeviceInfoDAO
@@ -233,6 +235,7 @@ def admin_validate_login():
 @login_required('admin')
 def admin_load_dashboard():
     try:
+
         return render_template('admin/index.html')
     except Exception as ex:
         print("admin_load_dashboard route exception occured>>>>>>>>>>", ex)

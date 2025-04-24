@@ -90,12 +90,11 @@
                                                 <td>
                                                    <select name="order_status" onchange="updateStatus(this)" data-order-id="{{ data[0].order_id }}" class="w-full appearance-none bg-white border border-gray-300 text-gray-700 text-sm px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 hover:border-blue-400 transition duration-150 ease-in-out">
                                                         {% if data[0].status %}
-                                                            <option value="{{ data[0].status }}">{{ data[0].status }}</option>
-                                                        {% else %}
-                                                            <option value="Pending">Pending</option>
-                                                            <option value="Shipped">Shipped</option>
-                                                            <option value="Delivered">Delivered</option>
-                                                            <option value="Cancelled">Cancelled</option>
+{#                                                            <option value="{{ data[0].status }}" selected>{{ data[0].status }}</option>#}
+                                                            <option value="Pending"{% if data[0].status == 'Pending' %} selected {% endif %}>Pending</option>
+                                                            <option value="Shipped" {% if data[0].status == 'Shipped' %} selected {% endif %}>Shipped</option>
+                                                            <option value="Delivered" {% if data[0].status == 'Delivered' %} selected {% endif %}>Delivered</option>
+                                                            <option value="Cancelled" {% if data[0].status == 'Cancelled' %} selected {% endif %}>Cancelled</option>
                                                         {% endif %}
                                                    </select>
                                                 </td>
@@ -125,7 +124,6 @@
 <!-- jQuery  -->
 <script>
     function updateStatus(selectElement) {
-        alert("het")
     const status = selectElement.value;
     const orderId = selectElement.dataset.orderId;
 
